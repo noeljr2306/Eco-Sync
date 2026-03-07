@@ -1,0 +1,421 @@
+{
+  "suppliers": [
+    {
+      "id": "s1",
+      "name": "Eko Electronics Hub",
+      "country": "Nigeria",
+      "city": "Lekki, Lagos",
+      "lat": 6.4281,
+      "lng": 3.6218,
+      "emission": 78,
+      "level": "high",
+      "products": ["Smartphones", "Lace Fabrics"]
+    },
+    {
+      "id": "s2",
+      "name": "EcoTech Berlin",
+      "country": "Germany",
+      "city": "Berlin",
+      "lat": 52.52,
+      "lng": 13.405,
+      "emission": 22,
+      "level": "eco",
+      "products": ["Solar Panels", "EV Components"]
+    },
+    {
+      "id": "s3",
+      "name": "Coal City Minerals",
+      "country": "Nigeria",
+      "city": "Enugu",
+      "lat": 6.4483,
+      "lng": 7.5139,
+      "emission": 41,
+      "level": "moderate",
+      "products": ["Coal", "Palm Oil"]
+    },
+    {
+      "id": "s4",
+      "name": "Amazonas Biofuel",
+      "country": "Brazil",
+      "city": "Manaus",
+      "lat": -3.119,
+      "lng": -60.0217,
+      "emission": 35,
+      "level": "eco",
+      "products": ["Bio-Ethanol", "Rubber"]
+    },
+    {
+      "id": "s5",
+      "name": "Seoul Semiconductor",
+      "country": "South Korea",
+      "city": "Seoul",
+      "lat": 37.5665,
+      "lng": 126.978,
+      "emission": 45,
+      "level": "moderate",
+      "products": ["Microchips", "OLED Panels"]
+    },
+    {
+      "id": "s6",
+      "name": "Shanghai Heavy Ind.",
+      "country": "China",
+      "city": "Shanghai",
+      "lat": 31.2304,
+      "lng": 121.4737,
+      "emission": 82,
+      "level": "high",
+      "products": ["Steel Girders", "Machinery"]
+    },
+    {
+      "id": "s7",
+      "name": "Jos Tin Resources",
+      "country": "Nigeria",
+      "city": "Jos",
+      "lat": 9.8965,
+      "lng": 8.8583,
+      "emission": 11,
+      "level": "eco",
+      "products": ["Tin Ore", "Columbite"]
+    },
+    {
+      "id": "s8",
+      "name": "Outback Mining",
+      "country": "Australia",
+      "city": "Perth",
+      "lat": -31.9505,
+      "lng": 115.8605,
+      "emission": 68,
+      "level": "high",
+      "products": ["Iron Ore", "Lithium"]
+    },
+    {
+      "id": "s9",
+      "name": "Abuja Tech Systems",
+      "country": "Nigeria",
+      "city": "Garki, Abuja",
+      "lat": 9.0765,
+      "lng": 7.3986,
+      "emission": 15,
+      "level": "eco",
+      "products": ["Software", "Fintech API"]
+    },
+    {
+      "id": "s10",
+      "name": "Houston Energy",
+      "country": "USA",
+      "city": "Houston",
+      "lat": 29.7604,
+      "lng": -95.3698,
+      "emission": 55,
+      "level": "moderate",
+      "products": ["Drilling Equipment"]
+    },
+    {
+      "id": "s11",
+      "name": "Aba Fashion House",
+      "country": "Nigeria",
+      "city": "Aba",
+      "lat": 5.1053,
+      "lng": 7.3503,
+      "emission": 30,
+      "level": "moderate",
+      "products": ["Leather Goods"]
+    },
+    {
+      "id": "s12",
+      "name": "Cape Town Vines",
+      "country": "South Africa",
+      "city": "Cape Town",
+      "lat": -33.9249,
+      "lng": 18.4241,
+      "emission": 20,
+      "level": "eco",
+      "products": ["Wine", "Fruit"]
+    },
+    {
+      "id": "s13",
+      "name": "Mumbai Textiles",
+      "country": "India",
+      "city": "Mumbai",
+      "lat": 19.076,
+      "lng": 72.8777,
+      "emission": 62,
+      "level": "high",
+      "products": ["Cotton", "Pharmaceuticals"]
+    },
+    {
+      "id": "s14",
+      "name": "Ha Long Tech",
+      "country": "Vietnam",
+      "city": "Haiphong",
+      "lat": 20.8449,
+      "lng": 106.6881,
+      "emission": 40,
+      "level": "moderate",
+      "products": ["Circuit Boards"]
+    },
+    {
+      "id": "s15",
+      "name": "Quebec Lumber",
+      "country": "Canada",
+      "city": "Quebec City",
+      "lat": 46.8139,
+      "lng": -71.208,
+      "emission": 18,
+      "level": "eco",
+      "products": ["Softwood", "Paper"]
+    },
+    {
+      "id": "s16",
+      "name": "Dubai Logistics",
+      "country": "UAE",
+      "city": "Dubai",
+      "lat": 25.2048,
+      "lng": 55.2708,
+      "emission": 44,
+      "level": "moderate",
+      "products": ["Aviation Fuel"]
+    },
+    {
+      "id": "s17",
+      "name": "Paris Luxury",
+      "country": "France",
+      "city": "Paris",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "emission": 12,
+      "level": "eco",
+      "products": ["Perfume", "Cosmetics"]
+    },
+    {
+      "id": "s18",
+      "name": "Kano Grain Silos",
+      "country": "Nigeria",
+      "city": "Kano",
+      "lat": 12.0022,
+      "lng": 8.592,
+      "emission": 25,
+      "level": "eco",
+      "products": ["Groundnuts", "Sorghum"]
+    },
+    {
+      "id": "s19",
+      "name": "Tokyo Robotics",
+      "country": "Japan",
+      "city": "Tokyo",
+      "lat": 35.6762,
+      "lng": 139.6503,
+      "emission": 28,
+      "level": "eco",
+      "products": ["Industrial Robots"]
+    },
+    {
+      "id": "s20",
+      "name": "Cairo Cotton",
+      "country": "Egypt",
+      "city": "Cairo",
+      "lat": 30.0444,
+      "lng": 31.2357,
+      "emission": 38,
+      "level": "moderate",
+      "products": ["Linens"]
+    },
+    {
+      "id": "s21",
+      "name": "London Fin Services",
+      "country": "UK",
+      "city": "London",
+      "lat": 51.5074,
+      "lng": -0.1278,
+      "emission": 10,
+      "level": "eco",
+      "products": ["Bonds", "Insurance"]
+    },
+    {
+      "id": "s22",
+      "name": "Mexico City Auto",
+      "country": "Mexico",
+      "city": "Mexico City",
+      "lat": 19.4326,
+      "lng": -99.1332,
+      "emission": 58,
+      "level": "high",
+      "products": ["Engines"]
+    },
+    {
+      "id": "s23",
+      "name": "Bangkok Plastics",
+      "country": "Thailand",
+      "city": "Bangkok",
+      "lat": 13.7563,
+      "lng": 100.5018,
+      "emission": 51,
+      "level": "moderate",
+      "products": ["Resins"]
+    },
+    {
+      "id": "s24",
+      "name": "Singapore Port",
+      "country": "Singapore",
+      "city": "Singapore",
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "emission": 33,
+      "level": "moderate",
+      "products": ["Marine Supplies"]
+    },
+    {
+      "id": "s25",
+      "name": "Onitsha Spare Parts",
+      "country": "Nigeria",
+      "city": "Onitsha",
+      "lat": 6.142,
+      "lng": 6.7881,
+      "emission": 45,
+      "level": "moderate",
+      "products": ["Auto Parts"]
+    }
+  ],
+  "routes": [
+    {
+      "id": "r1",
+      "from": "s6",
+      "to": "s1",
+      "type": "sea",
+      "desc": "China to Nigeria Tech Supply"
+    },
+    {
+      "id": "r2",
+      "from": "s5",
+      "to": "s19",
+      "type": "air",
+      "desc": "Korea to Japan Component Hub"
+    },
+    {
+      "id": "r3",
+      "from": "s10",
+      "to": "s5",
+      "type": "sea",
+      "desc": "USA to Nigeria Energy Support"
+    },
+    {
+      "id": "r4",
+      "from": "s8",
+      "to": "s6",
+      "type": "sea",
+      "desc": "Australia to China Ore Link"
+    },
+    {
+      "id": "r5",
+      "from": "s2",
+      "to": "s18",
+      "type": "air",
+      "desc": "Germany to Kano Solar Project"
+    },
+    {
+      "id": "r6",
+      "from": "s11",
+      "to": "s17",
+      "type": "sea",
+      "desc": "Aba to Paris Fashion Export"
+    },
+    {
+      "id": "r7",
+      "from": "s4",
+      "to": "s16",
+      "type": "sea",
+      "desc": "Brazil to UAE Biofuel"
+    },
+    {
+      "id": "r8",
+      "from": "s15",
+      "to": "s21",
+      "type": "sea",
+      "desc": "Canada to UK Timber Trade"
+    },
+    {
+      "id": "r9",
+      "from": "s13",
+      "to": "s24",
+      "type": "sea",
+      "desc": "India to Singapore Pharma"
+    },
+    {
+      "id": "r10",
+      "from": "s1",
+      "to": "s25",
+      "type": "land",
+      "desc": "Lagos to Onitsha Domestic"
+    },
+    {
+      "id": "r11",
+      "from": "s22",
+      "to": "s10",
+      "type": "land",
+      "desc": "Mexico to USA Auto Parts"
+    },
+    {
+      "id": "r12",
+      "from": "s20",
+      "to": "s2",
+      "type": "sea",
+      "desc": "Egypt to Germany Textiles"
+    },
+    {
+      "id": "r13",
+      "from": "s7",
+      "to": "s14",
+      "type": "sea",
+      "desc": "Jos to Vietnam Mineral Export"
+    },
+    {
+      "id": "r14",
+      "from": "s12",
+      "to": "s16",
+      "type": "air",
+      "desc": "SA to Dubai Fruit Export"
+    },
+    {
+      "id": "r15",
+      "from": "s9",
+      "to": "s21",
+      "type": "air",
+      "desc": "Abuja to London Fintech Link"
+    },
+    {
+      "id": "r16",
+      "from": "s3",
+      "to": "s13",
+      "type": "sea",
+      "desc": "Enugu to Mumbai Resource Trade"
+    },
+    {
+      "id": "r17",
+      "from": "s23",
+      "to": "s24",
+      "type": "sea",
+      "desc": "Thailand to Singapore Logistics"
+    },
+    {
+      "id": "r18",
+      "from": "s19",
+      "to": "s6",
+      "type": "sea",
+      "desc": "Japan to China Robotics"
+    },
+    {
+      "id": "r19",
+      "from": "s18",
+      "to": "s9",
+      "type": "land",
+      "desc": "Kano to Abuja Food Supply"
+    },
+    {
+      "id": "r20",
+      "from": "s25",
+      "to": "s3",
+      "type": "land",
+      "desc": "Onitsha to Enugu Distribution"
+    }
+  ]
+}
