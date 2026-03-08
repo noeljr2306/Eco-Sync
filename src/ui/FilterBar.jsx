@@ -31,7 +31,7 @@ export function FilterBar() {
       style={{
         position: "absolute",
         bottom: 32,
-        left: "50%",
+        left: "5%",
         transform: "translateX(-50%)",
         display: "flex",
         gap: 6,
