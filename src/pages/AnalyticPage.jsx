@@ -103,6 +103,7 @@ export default function AnalyticsPage() {
         fontFamily: "Segoe UI, sans-serif",
         overflowY: "auto",
         padding: "0 0 80px",
+        boxSizing: "border-box",
       }}
     >
       {/* Top nav */}
@@ -146,7 +147,7 @@ export default function AnalyticsPage() {
         </button>
       </div>
 
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "48px 32px" }}>
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px)" }}>
         {/* Header */}
         <div ref={headerRef} style={{ marginBottom: 48 }}>
           <div
@@ -173,7 +174,7 @@ export default function AnalyticsPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
             gap: 16,
             marginBottom: 48,
           }}

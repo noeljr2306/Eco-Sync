@@ -1,10 +1,21 @@
 import { useEffect, useRef } from "react";
 import { motion as _motion } from "framer-motion";
 import gsap from "gsap";
+import data from "../data/supplyChain.json";
 
-export function LandingHeader({ onExplore }) {
+export function LandingHeader({ onExplore, isMobile }) {
   const lineRef = useRef(null);
-
+  const countries = [...new Set(data.suppliers.map((s) => s.country))].length;
+  const avgEmission = Math.round(
+    data.suppliers.reduce((sum, s) => sum + s.emission, 0) /
+      data.suppliers.length,
+  );
+  const stats = [
+    { label: "Suppliers", value: data.suppliers.length },
+    { label: "Active Routes", value: data.routes.length },
+    { label: "Countries", value: countries },
+    { label: "Avg Emission", value: `${avgEmission}%` },
+  ];
   useEffect(() => {
     gsap.fromTo(
       lineRef.current,
@@ -18,29 +29,41 @@ export function LandingHeader({ onExplore }) {
       style={{
         position: "absolute",
         inset: 0,
-        zIndex: 10,
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
+        display: "flex",
         alignItems: "center",
+        // On mobile stack vertically at bottom, on desktop left-align
+        justifyContent: "flex-start",
         pointerEvents: "none",
       }}
     >
-      {/* LEFT — hero text panel */}
+      {/* Gradient backdrop only behind text */}
       <_motion.div
-        initial={{ opacity: 0, x: -40 }}
+        initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
         style={{
-          padding: "60px 48px 60px 60px",
-          background:
-            "linear-gradient(to right, rgba(10,10,15,0.97) 70%, transparent)",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
+          position: "relative",
+          zIndex: 2,
+          padding: isMobile ? "40px 28px" : "0 0 0 60px",
+          maxWidth: isMobile ? "100%" : 520,
+          width: isMobile ? "100%" : "45%",
           pointerEvents: "none",
         }}
       >
+        {/* Gradient that fades right so globe shows */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: isMobile
+              ? "linear-gradient(to top, rgba(10,10,15,0.98) 60%, transparent)"
+              : "linear-gradient(to right, rgba(10,10,15,0.97) 75%, transparent)",
+            zIndex: -1,
+            borderRadius: 0,
+          }}
+        />
+
+        {/* Tag line */}
         <_motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -56,14 +79,17 @@ export function LandingHeader({ onExplore }) {
           Global Supply Intelligence
         </_motion.div>
 
+        {/* Headline */}
         <_motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
           style={{
-            fontSize: "clamp(32px, 4vw, 52px)",
+            fontSize: isMobile
+              ? "clamp(28px, 8vw, 36px)"
+              : "clamp(36px, 4vw, 56px)",
             fontWeight: 800,
-            color: "#ffffff",
+            color: "#fff",
             lineHeight: 1.15,
             margin: 0,
           }}
@@ -83,7 +109,7 @@ export function LandingHeader({ onExplore }) {
           On Earth.
         </_motion.h1>
 
-        {/* Animated underline */}
+        {/* Underline */}
         <div
           ref={lineRef}
           style={{
@@ -95,28 +121,34 @@ export function LandingHeader({ onExplore }) {
           }}
         />
 
+        {/* Description */}
         <_motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           style={{
-            fontSize: 14,
+            fontSize: isMobile ? 13 : 14,
             color: "#666",
             lineHeight: 1.8,
-            margin: "0 0 36px",
-            maxWidth: 360,
+            margin: "0 0 32px",
+            maxWidth: 380,
           }}
         >
           Visualize supplier networks, emission levels, and logistics routes
           across the globe in real time.
         </_motion.p>
 
-        {/* CTAs */}
+        {/* CTA buttons */}
         <_motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2 }}
-          style={{ display: "flex", gap: 12, pointerEvents: "all" }}
+          style={{
+            display: "flex",
+            gap: 12,
+            flexWrap: "wrap",
+            pointerEvents: "all",
+          }}
         >
           <button
             onClick={onExplore}
@@ -124,9 +156,9 @@ export function LandingHeader({ onExplore }) {
               background: "linear-gradient(135deg, #FF6B6B, #ff4444)",
               border: "none",
               borderRadius: 8,
-              padding: "13px 30px",
+              padding: isMobile ? "11px 24px" : "13px 30px",
               color: "#fff",
-              fontSize: 13,
+              fontSize: isMobile ? 12 : 13,
               fontWeight: 700,
               cursor: "pointer",
               letterSpacing: 0.5,
@@ -142,9 +174,9 @@ export function LandingHeader({ onExplore }) {
               background: "rgba(255,107,107,0.08)",
               border: "1px solid #FF6B6B44",
               borderRadius: 8,
-              padding: "13px 30px",
+              padding: isMobile ? "11px 24px" : "13px 30px",
               color: "#FF6B6B",
-              fontSize: 13,
+              fontSize: isMobile ? 12 : 13,
               fontWeight: 600,
               cursor: "pointer",
               pointerEvents: "all",
@@ -154,25 +186,27 @@ export function LandingHeader({ onExplore }) {
           </button>
         </_motion.div>
 
-        {/* Bottom stats */}
+        {/* Stats row */}
         <_motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
           style={{
             display: "flex",
-            gap: 32,
-            marginTop: 48,
+            gap: isMobile ? 20 : 32,
+            marginTop: 40,
+            flexWrap: "wrap",
           }}
         >
-          {[
-            { label: "Suppliers", value: "8" },
-            { label: "Active Routes", value: "8" },
-            { label: "Countries", value: "8" },
-            { label: "Avg Emission", value: "40%" },
-          ].map((stat) => (
+          {stats.map((stat) => (
             <div key={stat.label}>
-              <div style={{ fontSize: 20, fontWeight: 700, color: "#fff" }}>
+              <div
+                style={{
+                  fontSize: isMobile ? 18 : 22,
+                  fontWeight: 700,
+                  color: "#fff",
+                }}
+              >
                 {stat.value}
               </div>
               <div
@@ -189,9 +223,6 @@ export function LandingHeader({ onExplore }) {
           ))}
         </_motion.div>
       </_motion.div>
-
-      {/* RIGHT — intentionally empty so globe shows through */}
-      <div style={{ height: "100%" }} />
     </div>
   );
 }

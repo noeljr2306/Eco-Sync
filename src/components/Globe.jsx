@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import GlobeGL from "react-globe.gl";
 import data from "../data/supplyChain.json";
 import { useMapStore } from "../store/useMapStore";
-
 const LEVEL_COLORS = {
   eco: "#00FF88",
   moderate: "#FFB347",
@@ -27,8 +26,7 @@ const arcs = data.routes.map((route) => {
     type: route.type,
   };
 });
-
-export const Globe = forwardRef(function Globe(_, ref) {
+export const Globe = forwardRef(function Globe({ width, height }, ref) {
   const setSelectedNode = useMapStore((s) => s.setSelectedNode);
   const activeFilter = useMapStore((s) => s.activeFilter);
 
@@ -91,8 +89,8 @@ export const Globe = forwardRef(function Globe(_, ref) {
       ringMaxRadius={3}
       ringPropagationSpeed={2}
       ringRepeatPeriod={1000}
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={width || window.innerWidth}
+      height={height || window.innerHeight}
     />
   );
 });
