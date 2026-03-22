@@ -97,11 +97,9 @@ export default function AnalyticsPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       style={{
-        minHeight: "100vh",
         background: "#0a0a0f",
         color: "#fff",
         fontFamily: "Segoe UI, sans-serif",
-        overflowY: "auto",
         padding: "0 0 80px",
         boxSizing: "border-box",
       }}
@@ -145,9 +143,30 @@ export default function AnalyticsPage() {
         >
           ← Globe View
         </button>
+
+        <button
+          onClick={() => navigate("/finance")}
+          style={{
+            background: "none",
+            border: "1px solid #2a2a2e",
+            borderRadius: 8,
+            padding: "7px 16px",
+            color: "#aaa",
+            fontSize: 12,
+            cursor: "pointer",
+          }}
+        >
+          Finance View →
+        </button>
       </div>
 
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px)" }}>
+      <div
+        style={{
+          maxWidth: 1000,
+          margin: "0 auto",
+          padding: "clamp(24px, 4vw, 48px) clamp(16px, 4vw, 32px)",
+        }}
+      >
         {/* Header */}
         <div ref={headerRef} style={{ marginBottom: 48 }}>
           <div
@@ -359,11 +378,16 @@ export default function AnalyticsPage() {
               {data.routes.map((route, i) => {
                 const from = data.suppliers.find((s) => s.id === route.from);
                 const to = data.suppliers.find((s) => s.id === route.to);
-                const delta = to.emission - from.emission;
-                const color = ROUTE_COLORS[route.type];
+                const fromEmission = Number(from?.emission ?? 0);
+                const toEmission = Number(to?.emission ?? 0);
+                const delta =
+                  Number.isFinite(toEmission) && Number.isFinite(fromEmission)
+                    ? toEmission - fromEmission
+                    : 0;
+                const color = ROUTE_COLORS[route.type] || "#999";
                 return (
                   <tr
-                    key={route.id}
+                    key={`${route.id}-${i}`}
                     style={{
                       borderBottom: "1px solid #1a1a1f",
                       background: i % 2 === 0 ? "transparent" : "#0d0d0f",
@@ -375,10 +399,10 @@ export default function AnalyticsPage() {
                       {route.id.toUpperCase()}
                     </td>
                     <td style={{ padding: "12px", color: "#ccc" }}>
-                      {from.city}
+                      {from?.city ?? "Unknown"}
                     </td>
                     <td style={{ padding: "12px", color: "#ccc" }}>
-                      {to.city}
+                      {to?.city ?? "Unknown"}
                     </td>
                     <td style={{ padding: "12px" }}>
                       <span

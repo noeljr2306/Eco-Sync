@@ -1,19 +1,21 @@
 import { useMapStore } from "./store/useMapStore";
-import {Sidebar} from "./ui/Sidebar";
+import { Sidebar } from "./ui/Sidebar";
 import { FilterBar } from "./ui/FilterBar";
 import { Route, Routes } from "react-router-dom";
 import MapPage from "./pages/MapPage";
-import AnalyticsPage from "./pages/AnalyticPage"
+import AnalyticsPage from "./pages/AnalyticPage";
+import FinancePage from "./pages/FinancePage";
 
 export default function App() {
   const selectedNode = useMapStore((s) => s.selectedNode);
   const clearSelection = useMapStore((s) => s.clearSelection);
 
   return (
-    <div className="h-screen w-screen bg-[#0a0a0f]">
+    <div className="min-h-screen w-screen bg-[#0a0a0f]">
       <Routes>
-        <Route path="/" element={<MapPage/>}/>
-        <Route path="/analytics" element={<AnalyticsPage/>}/>
+        <Route path="/" element={<MapPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/finance" element={<FinancePage />} />
       </Routes>
       <FilterBar />
       <Sidebar />

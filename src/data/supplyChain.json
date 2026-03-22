@@ -9,7 +9,35 @@
       "lng": 3.6218,
       "emission": 78,
       "level": "high",
-      "products": ["Smartphones", "Lace Fabrics"]
+      "products": ["Smartphones", "Lace Fabrics"],
+      "telemetry": {
+        "inventoryLevel": 32,
+        "leadTimeDays": 10,
+        "onTimeDeliveryRate": 0.68,
+        "disruption": "traffic_delay",
+        "riskScore": 72
+      },
+      "iso_id": "UN/CEFACT:NG-LAG-S1-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-LAG-S1-2026",
+        "issued_date": "2026-01-12",
+        "regulation": "EU 2024/1781",
+        "materials": [
+          { "name": "Silicon", "origin": "China", "recycled_pct": 18 },
+          { "name": "Copper", "origin": "DRC", "recycled_pct": 36 }
+        ],
+        "scope3_kg_co2e_per_unit": 5.8,
+        "carbon_border_adjustment": true,
+        "certifications": ["ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.84,
+        "cashToCashDays": 38,
+        "inventoryTurnover": 6.2,
+        "daysPayableOutstanding": 42,
+        "daysSalesOutstanding": 28,
+        "daysInventoryOutstanding": 52
+      }
     },
     {
       "id": "s2",
@@ -20,7 +48,35 @@
       "lng": 13.405,
       "emission": 22,
       "level": "eco",
-      "products": ["Solar Panels", "EV Components"]
+      "products": ["Solar Panels", "EV Components"],
+      "telemetry": {
+        "inventoryLevel": 64,
+        "leadTimeDays": 6,
+        "onTimeDeliveryRate": 0.94,
+        "disruption": "none",
+        "riskScore": 18
+      },
+      "iso_id": "UN/CEFACT:DE-BER-S2-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:DE-BER-S2-2026",
+        "issued_date": "2026-01-05",
+        "regulation": "EU 2024/1781",
+        "materials": [
+          { "name": "Silicon", "origin": "Germany", "recycled_pct": 52 },
+          { "name": "Glass", "origin": "Poland", "recycled_pct": 48 }
+        ],
+        "scope3_kg_co2e_per_unit": 1.9,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 14001", "GRS 4.0"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.84,
+        "cashToCashDays": 18,
+        "inventoryTurnover": 2.2,
+        "daysPayableOutstanding": 22,
+        "daysSalesOutstanding": 29,
+        "daysInventoryOutstanding": 52
+      }
     },
     {
       "id": "s3",
@@ -31,7 +87,35 @@
       "lng": 7.5139,
       "emission": 41,
       "level": "moderate",
-      "products": ["Coal", "Palm Oil"]
+      "products": ["Coal", "Palm Oil"],
+      "telemetry": {
+        "inventoryLevel": 41,
+        "leadTimeDays": 12,
+        "onTimeDeliveryRate": 0.73,
+        "disruption": "power_outage",
+        "riskScore": 55
+      },
+      "iso_id": "UN/CEFACT:NG-ENU-S3-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-ENU-S3-2026",
+        "issued_date": "2026-02-01",
+        "regulation": "EU 2024/1781",
+        "materials": [
+          { "name": "Coal", "origin": "Nigeria", "recycled_pct": 5 },
+          { "name": "Palm Oil", "origin": "Nigeria", "recycled_pct": 10 }
+        ],
+        "scope3_kg_co2e_per_unit": 6.3,
+        "carbon_border_adjustment": true,
+        "certifications": []
+      },
+      "kpi": {
+        "perfectOrderRate": 0.14,
+        "cashToCashDays": 48,
+        "inventoryTurnover": 9.2,
+        "daysPayableOutstanding": 72,
+        "daysSalesOutstanding": 98,
+        "daysInventoryOutstanding": 92
+      }
     },
     {
       "id": "s4",
@@ -42,7 +126,34 @@
       "lng": -60.0217,
       "emission": 35,
       "level": "eco",
-      "products": ["Bio-Ethanol", "Rubber"]
+      "products": ["Bio-Ethanol", "Rubber"],
+      "telemetry": {
+        "inventoryLevel": 52,
+        "leadTimeDays": 9,
+        "onTimeDeliveryRate": 0.88,
+        "disruption": "weather",
+        "riskScore": 34
+      },
+      "iso_id": "UN/CEFACT:BR-MAN-S4-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:BR-MAN-S4-2026",
+        "issued_date": "2026-01-18",
+        "materials": [
+          { "name": "Ethanol", "origin": "Brazil", "recycled_pct": 40 },
+          { "name": "Rubber", "origin": "Brazil", "recycled_pct": 28 }
+        ],
+        "scope3_kg_co2e_per_unit": 2.6,
+        "carbon_border_adjustment": false,
+        "certifications": ["GRS 4.0"]
+      },
+      "kpi": {
+        "perfectOrderRate": 1.5,
+        "cashToCashDays": 88,
+        "inventoryTurnover": 1.2,
+        "daysPayableOutstanding": 20,
+        "daysSalesOutstanding": 89,
+        "daysInventoryOutstanding": 25
+      }
     },
     {
       "id": "s5",
@@ -53,7 +164,34 @@
       "lng": 126.978,
       "emission": 45,
       "level": "moderate",
-      "products": ["Microchips", "OLED Panels"]
+      "products": ["Microchips", "OLED Panels"],
+      "telemetry": {
+        "inventoryLevel": 28,
+        "leadTimeDays": 7,
+        "onTimeDeliveryRate": 0.91,
+        "disruption": "chip_shortage",
+        "riskScore": 49
+      },
+      "iso_id": "UN/CEFACT:KR-SEO-S5-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:KR-SEO-S5-2026",
+        "issued_date": "2026-01-09",
+        "materials": [
+          { "name": "Gallium", "origin": "China", "recycled_pct": 14 },
+          { "name": "Glass", "origin": "Japan", "recycled_pct": 30 }
+        ],
+        "scope3_kg_co2e_per_unit": 4.3,
+        "carbon_border_adjustment": true,
+        "certifications": ["ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 2.84,
+        "cashToCashDays": 80,
+        "inventoryTurnover": 7.0,
+        "daysPayableOutstanding": 21,
+        "daysSalesOutstanding": 78,
+        "daysInventoryOutstanding": 22
+      }
     },
     {
       "id": "s6",
@@ -64,7 +202,34 @@
       "lng": 121.4737,
       "emission": 82,
       "level": "high",
-      "products": ["Steel Girders", "Machinery"]
+      "products": ["Steel Girders", "Machinery"],
+      "telemetry": {
+        "inventoryLevel": 19,
+        "leadTimeDays": 16,
+        "onTimeDeliveryRate": 0.58,
+        "disruption": "port_delay",
+        "riskScore": 88
+      },
+      "iso_id": "UN/CEFACT:CN-SHA-S6-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:CN-SHA-S6-2026",
+        "issued_date": "2026-02-10",
+        "materials": [
+          { "name": "Steel", "origin": "China", "recycled_pct": 22 },
+          { "name": "Iron", "origin": "Australia", "recycled_pct": 19 }
+        ],
+        "scope3_kg_co2e_per_unit": 7.4,
+        "carbon_border_adjustment": true,
+        "certifications": []
+      },
+      "kpi": {
+        "perfectOrderRate": 1.78,
+        "cashToCashDays": 48,
+        "inventoryTurnover": 3.0,
+        "daysPayableOutstanding": 30,
+        "daysSalesOutstanding": 49,
+        "daysInventoryOutstanding": 59
+      }
     },
     {
       "id": "s7",
@@ -75,7 +240,34 @@
       "lng": 8.8583,
       "emission": 11,
       "level": "eco",
-      "products": ["Tin Ore", "Columbite"]
+      "products": ["Tin Ore", "Columbite"],
+      "telemetry": {
+        "inventoryLevel": 70,
+        "leadTimeDays": 8,
+        "onTimeDeliveryRate": 0.95,
+        "disruption": "none",
+        "riskScore": 12
+      },
+      "iso_id": "UN/CEFACT:NG-JOS-S7-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-JOS-S7-2026",
+        "issued_date": "2026-01-02",
+        "materials": [
+          { "name": "Tin", "origin": "Nigeria", "recycled_pct": 55 },
+          { "name": "Columbite", "origin": "Nigeria", "recycled_pct": 33 }
+        ],
+        "scope3_kg_co2e_per_unit": 1.2,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 3.4,
+        "cashToCashDays": 18,
+        "inventoryTurnover": 2.2,
+        "daysPayableOutstanding": 32,
+        "daysSalesOutstanding": 39,
+        "daysInventoryOutstanding": 43
+      }
     },
     {
       "id": "s8",
@@ -86,8 +278,36 @@
       "lng": 115.8605,
       "emission": 68,
       "level": "high",
-      "products": ["Iron Ore", "Lithium"]
+      "products": ["Iron Ore", "Lithium"],
+      "telemetry": {
+        "inventoryLevel": 25,
+        "leadTimeDays": 18,
+        "onTimeDeliveryRate": 0.66,
+        "disruption": "equipment_failure",
+        "riskScore": 76
+      },
+      "iso_id": "UN/CEFACT:AU-PER-S8-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:AU-PER-S8-2026",
+        "issued_date": "2026-02-14",
+        "materials": [
+          { "name": "Lithium", "origin": "Australia", "recycled_pct": 16 },
+          { "name": "Iron Ore", "origin": "Australia", "recycled_pct": 20 }
+        ],
+        "scope3_kg_co2e_per_unit": 6.8,
+        "carbon_border_adjustment": true,
+        "certifications": []
+      },
+      "kpi": {
+        "perfectOrderRate": 3.4,
+        "cashToCashDays": 30,
+        "inventoryTurnover": 6.0,
+        "daysPayableOutstanding": 25,
+        "daysSalesOutstanding": 28,
+        "daysInventoryOutstanding": 57
+      }
     },
+
     {
       "id": "s9",
       "name": "Abuja Tech Systems",
@@ -97,8 +317,35 @@
       "lng": 7.3986,
       "emission": 15,
       "level": "eco",
-      "products": ["Software", "Fintech API"]
+      "products": ["Software", "Fintech API"],
+      "telemetry": {
+        "inventoryLevel": 80,
+        "leadTimeDays": 5,
+        "onTimeDeliveryRate": 0.97,
+        "disruption": "none",
+        "riskScore": 9
+      },
+      "iso_id": "UN/CEFACT:NG-ABJ-S9-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-ABJ-S9-2026",
+        "issued_date": "2026-01-01",
+        "materials": [
+          { "name": "Cloud Infra", "origin": "Global", "recycled_pct": 70 }
+        ],
+        "scope3_kg_co2e_per_unit": 0.6,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 27001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 1.55,
+        "cashToCashDays": 32,
+        "inventoryTurnover": 4.2,
+        "daysPayableOutstanding": 32,
+        "daysSalesOutstanding": 58,
+        "daysInventoryOutstanding": 22
+      }
     },
+
     {
       "id": "s10",
       "name": "Houston Energy",
@@ -108,172 +355,34 @@
       "lng": -95.3698,
       "emission": 55,
       "level": "moderate",
-      "products": ["Drilling Equipment"]
-    },
-    {
-      "id": "s11",
-      "name": "Aba Fashion House",
-      "country": "Nigeria",
-      "city": "Aba",
-      "lat": 5.1053,
-      "lng": 7.3503,
-      "emission": 30,
-      "level": "moderate",
-      "products": ["Leather Goods"]
-    },
-    {
-      "id": "s12",
-      "name": "Cape Town Vines",
-      "country": "South Africa",
-      "city": "Cape Town",
-      "lat": -33.9249,
-      "lng": 18.4241,
-      "emission": 20,
-      "level": "eco",
-      "products": ["Wine", "Fruit"]
-    },
-    {
-      "id": "s13",
-      "name": "Mumbai Textiles",
-      "country": "India",
-      "city": "Mumbai",
-      "lat": 19.076,
-      "lng": 72.8777,
-      "emission": 62,
-      "level": "high",
-      "products": ["Cotton", "Pharmaceuticals"]
-    },
-    {
-      "id": "s14",
-      "name": "Ha Long Tech",
-      "country": "Vietnam",
-      "city": "Haiphong",
-      "lat": 20.8449,
-      "lng": 106.6881,
-      "emission": 40,
-      "level": "moderate",
-      "products": ["Circuit Boards"]
-    },
-    {
-      "id": "s15",
-      "name": "Quebec Lumber",
-      "country": "Canada",
-      "city": "Quebec City",
-      "lat": 46.8139,
-      "lng": -71.208,
-      "emission": 18,
-      "level": "eco",
-      "products": ["Softwood", "Paper"]
-    },
-    {
-      "id": "s16",
-      "name": "Dubai Logistics",
-      "country": "UAE",
-      "city": "Dubai",
-      "lat": 25.2048,
-      "lng": 55.2708,
-      "emission": 44,
-      "level": "moderate",
-      "products": ["Aviation Fuel"]
-    },
-    {
-      "id": "s17",
-      "name": "Paris Luxury",
-      "country": "France",
-      "city": "Paris",
-      "lat": 48.8566,
-      "lng": 2.3522,
-      "emission": 12,
-      "level": "eco",
-      "products": ["Perfume", "Cosmetics"]
-    },
-    {
-      "id": "s18",
-      "name": "Kano Grain Silos",
-      "country": "Nigeria",
-      "city": "Kano",
-      "lat": 12.0022,
-      "lng": 8.592,
-      "emission": 25,
-      "level": "eco",
-      "products": ["Groundnuts", "Sorghum"]
-    },
-    {
-      "id": "s19",
-      "name": "Tokyo Robotics",
-      "country": "Japan",
-      "city": "Tokyo",
-      "lat": 35.6762,
-      "lng": 139.6503,
-      "emission": 28,
-      "level": "eco",
-      "products": ["Industrial Robots"]
-    },
-    {
-      "id": "s20",
-      "name": "Cairo Cotton",
-      "country": "Egypt",
-      "city": "Cairo",
-      "lat": 30.0444,
-      "lng": 31.2357,
-      "emission": 38,
-      "level": "moderate",
-      "products": ["Linens"]
-    },
-    {
-      "id": "s21",
-      "name": "London Fin Services",
-      "country": "UK",
-      "city": "London",
-      "lat": 51.5074,
-      "lng": -0.1278,
-      "emission": 10,
-      "level": "eco",
-      "products": ["Bonds", "Insurance"]
-    },
-    {
-      "id": "s22",
-      "name": "Mexico City Auto",
-      "country": "Mexico",
-      "city": "Mexico City",
-      "lat": 19.4326,
-      "lng": -99.1332,
-      "emission": 58,
-      "level": "high",
-      "products": ["Engines"]
-    },
-    {
-      "id": "s23",
-      "name": "Bangkok Plastics",
-      "country": "Thailand",
-      "city": "Bangkok",
-      "lat": 13.7563,
-      "lng": 100.5018,
-      "emission": 51,
-      "level": "moderate",
-      "products": ["Resins"]
-    },
-    {
-      "id": "s24",
-      "name": "Singapore Port",
-      "country": "Singapore",
-      "city": "Singapore",
-      "lat": 1.3521,
-      "lng": 103.8198,
-      "emission": 33,
-      "level": "moderate",
-      "products": ["Marine Supplies"]
-    },
-    {
-      "id": "s25",
-      "name": "Onitsha Spare Parts",
-      "country": "Nigeria",
-      "city": "Onitsha",
-      "lat": 6.142,
-      "lng": 6.7881,
-      "emission": 45,
-      "level": "moderate",
-      "products": ["Auto Parts"]
+      "products": ["Drilling Equipment"],
+      "telemetry": {
+        "inventoryLevel": 37,
+        "leadTimeDays": 13,
+        "onTimeDeliveryRate": 0.79,
+        "disruption": "supply_shortage",
+        "riskScore": 61
+      },
+      "iso_id": "UN/CEFACT:US-HOU-S10-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:US-HOU-S10-2026",
+        "issued_date": "2026-02-03",
+        "materials": [
+          { "name": "Steel", "origin": "USA", "recycled_pct": 35 },
+          { "name": "Oil", "origin": "USA", "recycled_pct": 8 }
+        ],
+        "scope3_kg_co2e_per_unit": 5.1,
+        "carbon_border_adjustment": true,
+        "certifications": []
+      },
+      "kpi": {
+        "perfectOrderRate": 2.50,
+        "cashToCashDays": 30,
+        "inventoryTurnover": 6.5,
+        "daysPayableOutstanding": 58,
+        "daysSalesOutstanding": 18,
+        "daysInventoryOutstanding": 50
+      }
     }
   ],
   "routes": [
@@ -348,21 +457,21 @@
       "desc": "Lagos to Onitsha Domestic"
     },
     {
-      "id": "r11",
+      "id": "r4",
       "from": "s22",
       "to": "s10",
       "type": "land",
       "desc": "Mexico to USA Auto Parts"
     },
     {
-      "id": "r12",
+      "id": "r2",
       "from": "s20",
       "to": "s2",
       "type": "sea",
       "desc": "Egypt to Germany Textiles"
     },
     {
-      "id": "r13",
+      "id": "r8",
       "from": "s7",
       "to": "s14",
       "type": "sea",
@@ -378,40 +487,40 @@
     {
       "id": "r15",
       "from": "s9",
-      "to": "s21",
+      "to": "s2",
       "type": "air",
       "desc": "Abuja to London Fintech Link"
     },
     {
-      "id": "r16",
+      "id": "r1",
       "from": "s3",
       "to": "s13",
       "type": "sea",
       "desc": "Enugu to Mumbai Resource Trade"
     },
     {
-      "id": "r17",
+      "id": "r7",
       "from": "s23",
       "to": "s24",
       "type": "sea",
       "desc": "Thailand to Singapore Logistics"
     },
     {
-      "id": "r18",
+      "id": "r8",
       "from": "s19",
       "to": "s6",
       "type": "sea",
       "desc": "Japan to China Robotics"
     },
     {
-      "id": "r19",
+      "id": "r9",
       "from": "s18",
       "to": "s9",
       "type": "land",
       "desc": "Kano to Abuja Food Supply"
     },
     {
-      "id": "r20",
+      "id": "r10",
       "from": "s25",
       "to": "s3",
       "type": "land",

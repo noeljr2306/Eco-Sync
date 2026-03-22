@@ -8,6 +8,7 @@ import { FilterBar } from "../ui/FilterBar";
 import { LandingHeader } from "../ui/LandingHeader";
 import { Loader } from "../components/Loader";
 import { useMapStore } from "../store/useMapStore";
+import { AgentPanel } from "../ui/AgentPanel";
 
 export default function MapPage() {
   const [explored, setExplored] = useState(false);
@@ -16,8 +17,8 @@ export default function MapPage() {
     height: window.innerHeight,
   });
 
-  const selectedNode = useMapStore(s => s.selectedNode);
-  const clearSelection = useMapStore(s => s.clearSelection);
+  const selectedNode = useMapStore((s) => s.selectedNode);
+  const clearSelection = useMapStore((s) => s.clearSelection);
   const globeRef = useRef(null);
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
@@ -53,17 +54,23 @@ export default function MapPage() {
   // Globe size — smaller on mobile
   const isMobile = dimensions.width < 768;
   const isTablet = dimensions.width >= 768 && dimensions.width < 1024;
-  const globeSize = isMobile ? dimensions.width : isTablet ? dimensions.width * 0.75 : dimensions.height * 1.1;
+  const globeSize = isMobile
+    ? dimensions.width
+    : isTablet
+      ? dimensions.width * 0.75
+      : dimensions.height * 1.1;
 
   return (
-    <div style={{
-      width: "100vw",
-      height: "100vh",
-      position: "relative",
-      background: "#0a0a0f",
-      overflow: "hidden",
-      fontFamily: "Segoe UI, sans-serif",
-    }}>
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        position: "relative",
+        background: "#0a0a0f",
+        overflow: "hidden",
+        fontFamily: "Segoe UI, sans-serif",
+      }}
+    >
       <Loader />
 
       {/* Globe wrapper — starts anchored to right, animates to center */}
@@ -79,11 +86,7 @@ export default function MapPage() {
           transition: "none",
         }}
       >
-        <Globe
-          ref={globeRef}
-          width={globeSize}
-          height={globeSize}
-        />
+        <Globe ref={globeRef} width={globeSize} height={globeSize} />
       </div>
 
       {/* Landing overlay */}
@@ -113,12 +116,18 @@ export default function MapPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ position: "absolute", inset: 0, zIndex: 20, pointerEvents: "none" }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 20,
+              pointerEvents: "none",
+            }}
           >
             {/* Everything inside needs its own pointerEvents */}
             <div style={{ pointerEvents: "all" }}>
               <FilterBar />
               <Sidebar />
+              <AgentPanel />
             </div>
 
             {/* Analytics button */}
@@ -143,7 +152,9 @@ export default function MapPage() {
                 letterSpacing: 1,
                 pointerEvents: "all",
               }}
-            >Analytics →</_motion.button>
+            >
+              Analytics →
+            </_motion.button>
 
             {/* Reset button */}
             {selectedNode && (
@@ -168,7 +179,9 @@ export default function MapPage() {
                   pointerEvents: "all",
                   whiteSpace: "nowrap",
                 }}
-              >← RESET VIEW</_motion.button>
+              >
+                ← RESET VIEW
+              </_motion.button>
             )}
           </_motion.div>
         )}

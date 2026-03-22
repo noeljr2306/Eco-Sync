@@ -250,6 +250,116 @@ export function Sidebar() {
                 </div>
               ))}
             </div>
+            {selectedNode.dpp && (
+              <>
+                <div style={{ height: 1, background: "#1e1e24" }} />
+                <div>
+                  <div
+                    style={{
+                      fontSize: 11,
+                      color: "#555",
+                      letterSpacing: 1.5,
+                      textTransform: "uppercase",
+                      marginBottom: 10,
+                    }}
+                  >
+                    EU Digital Product Passport
+                  </div>
+                  <div
+                    style={{
+                      background: "#0d0d0f",
+                      borderRadius: 8,
+                      padding: "12px 14px",
+                      fontSize: 11,
+                      lineHeight: 2,
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span style={{ color: "#555" }}>Passport ID</span>
+                      <span
+                        style={{
+                          color: "#aaa",
+                          fontFamily: "monospace",
+                          fontSize: 10,
+                        }}
+                      >
+                        {selectedNode.dpp.passport_id}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span style={{ color: "#555" }}>Regulation</span>
+                      <span style={{ color: "#aaa" }}>
+                        {selectedNode.dpp.regulation}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span style={{ color: "#555" }}>Scope 3</span>
+                      <span style={{ color: "#FFB347", fontWeight: 600 }}>
+                        {selectedNode.dpp.scope3_kg_co2e_per_unit} kg CO₂e/unit
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <span style={{ color: "#555" }}>CBAM</span>
+                      <span
+                        style={{
+                          color: selectedNode.dpp.carbon_border_adjustment
+                            ? "#FF6B6B"
+                            : "#00FF88",
+                        }}
+                      >
+                        {selectedNode.dpp.carbon_border_adjustment
+                          ? "Applicable"
+                          : "Exempt"}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        marginTop: 8,
+                        display: "flex",
+                        gap: 6,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {selectedNode.dpp.certifications.map((c) => (
+                        <span
+                          key={c}
+                          style={{
+                            background: "#00FF8811",
+                            border: "1px solid #00FF8833",
+                            borderRadius: 4,
+                            padding: "2px 8px",
+                            color: "#00FF88",
+                            fontSize: 10,
+                          }}
+                        >
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
 
           {/* View Full Profile button */}
