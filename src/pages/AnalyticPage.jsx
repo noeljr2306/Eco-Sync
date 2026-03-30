@@ -1,8 +1,5 @@
-import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion as _motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   BarChart,
   Bar,
@@ -10,14 +7,8 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  LineChart,
-  Line,
-  CartesianGrid,
-  Legend,
 } from "recharts";
 import data from "../data/supplyChain.json";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const LEVEL_COLORS = {
   eco: "#00FF88",
@@ -31,7 +22,6 @@ const ROUTE_COLORS = {
   land: "#00FF88",
 };
 
-// Build chart data from supplyChain.json
 const emissionData = data.suppliers.map((s) => ({
   name: s.city,
   emission: s.emission,
@@ -44,7 +34,6 @@ const routeTypeData = [
   { type: "Land", count: data.routes.filter((r) => r.type === "land").length },
 ];
 
-// Custom bar color per supplier
 function CustomBar(props) {
   const { x, y, width, height, index } = props;
   return (
@@ -62,33 +51,6 @@ function CustomBar(props) {
 
 export default function AnalyticsPage() {
   const navigate = useNavigate();
-  const headerRef = useRef();
-  const chart1Ref = useRef();
-  const chart2Ref = useRef();
-  const tableRef = useRef();
-
-  useEffect(() => {
-    // Scroll-triggered reveals
-    const els = [chart1Ref.current, chart2Ref.current, tableRef.current];
-    els.forEach((el) => {
-      gsap.fromTo(
-        el,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 85%",
-          },
-        },
-      );
-    });
-
-    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
-  }, []);
 
   return (
     <_motion.div
@@ -145,7 +107,6 @@ export default function AnalyticsPage() {
         >
           ← Globe View
         </button>
-
         <button
           onClick={() => navigate("/finance")}
           style={{
@@ -170,7 +131,7 @@ export default function AnalyticsPage() {
         }}
       >
         {/* Header */}
-        <div ref={headerRef} style={{ marginBottom: 48 }}>
+        <div style={{ marginBottom: 48 }}>
           <div
             style={{
               fontSize: 11,
@@ -251,7 +212,6 @@ export default function AnalyticsPage() {
 
         {/* Emission Bar Chart */}
         <div
-          ref={chart1Ref}
           style={{
             background: "#18181c",
             borderRadius: 12,
@@ -296,7 +256,6 @@ export default function AnalyticsPage() {
 
         {/* Route Type Chart */}
         <div
-          ref={chart2Ref}
           style={{
             background: "#18181c",
             borderRadius: 12,
@@ -340,7 +299,6 @@ export default function AnalyticsPage() {
 
         {/* Route Table */}
         <div
-          ref={tableRef}
           style={{
             background: "#18181c",
             borderRadius: 12,

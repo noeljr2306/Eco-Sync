@@ -16,6 +16,7 @@ export function LandingHeader({ onExplore, isMobile }) {
     { label: "Countries", value: countries },
     { label: "Avg Emission", value: `${avgEmission}%` },
   ];
+
   useEffect(() => {
     gsap.fromTo(
       lineRef.current,
@@ -30,13 +31,11 @@ export function LandingHeader({ onExplore, isMobile }) {
         position: "absolute",
         inset: 0,
         display: "flex",
-        alignItems: "center",
-        // On mobile stack vertically at bottom, on desktop left-align
+        alignItems: isMobile ? "flex-end" : "center",
         justifyContent: "flex-start",
         pointerEvents: "none",
       }}
     >
-      {/* Gradient backdrop only behind text */}
       <_motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}
@@ -44,22 +43,22 @@ export function LandingHeader({ onExplore, isMobile }) {
         style={{
           position: "relative",
           zIndex: 2,
-          padding: isMobile ? "40px 28px" : "0 0 0 60px",
-          maxWidth: isMobile ? "100%" : 520,
-          width: isMobile ? "100%" : "45%",
+          padding: isMobile ? "40px 28px 48px" : "0 0 0 60px",
+          // Constrain to left half so globe has full right side
+          maxWidth: isMobile ? "100%" : 500,
+          width: isMobile ? "100%" : "42%",
           pointerEvents: "none",
         }}
       >
-        {/* Gradient that fades right so globe shows */}
+        {/* Gradient only behind text area */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             background: isMobile
               ? "linear-gradient(to top, rgba(10,10,15,0.98) 60%, transparent)"
-              : "linear-gradient(to right, rgba(10,10,15,0.97) 75%, transparent)",
+              : "linear-gradient(to right, rgba(10,10,15,0.97) 70%, transparent)",
             zIndex: -1,
-            borderRadius: 0,
           }}
         />
 
@@ -87,7 +86,7 @@ export function LandingHeader({ onExplore, isMobile }) {
           style={{
             fontSize: isMobile
               ? "clamp(28px, 8vw, 36px)"
-              : "clamp(36px, 4vw, 56px)",
+              : "clamp(36px, 3.5vw, 52px)",
             fontWeight: 800,
             color: "#fff",
             lineHeight: 1.15,
@@ -131,7 +130,7 @@ export function LandingHeader({ onExplore, isMobile }) {
             color: "#666",
             lineHeight: 1.8,
             margin: "0 0 32px",
-            maxWidth: 380,
+            maxWidth: 360,
           }}
         >
           Visualize supplier networks, emission levels, and logistics routes

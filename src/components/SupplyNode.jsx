@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Html } from "@react-three/drei";
+import { Html } from "@react-three/drei/web/Html";
 import { geoToVector3 } from "../utils/geoToVector3";
 import { useMapStore } from "../store/useMapStore";
 

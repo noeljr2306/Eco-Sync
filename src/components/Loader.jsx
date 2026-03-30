@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { useProgress } from "@react-three/drei";
+import { useProgress } from "@react-three/drei/core/Progress";
 import gsap from "gsap";
 
 export function Loader() {

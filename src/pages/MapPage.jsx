@@ -1,4 +1,4 @@
-import { useState, useRef, } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion as _motion, AnimatePresence } from "framer-motion";
 import { Globe } from "../components/Globe";
@@ -7,6 +7,7 @@ import { FilterBar } from "../ui/FilterBar";
 import { LandingHeader } from "../ui/LandingHeader";
 import { Loader } from "../components/Loader";
 import { useMapStore } from "../store/useMapStore";
+import { AgentPanel } from "../ui/AgentPanel";
 
 export default function MapPage() {
   const [explored, setExplored] = useState(false);
@@ -17,7 +18,6 @@ export default function MapPage() {
 
   function handleExplore() {
     setExplored(true);
-    // Slowly auto-rotate after hero is dismissed
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
       globeRef.current.controls().autoRotateSpeed = 0.6;
@@ -36,10 +36,33 @@ export default function MapPage() {
     >
       <Loader />
 
-      {/* Globe — always rendered in background */}
-      <div style={{ position: "absolute", inset: 0 }}>
+      {/* Globe — animated from right to center */}
+      <_motion.div
+        animate={
+          explored
+            ? { x: "0%", scale: 1 }
+            : {
+                // On mobile: center it (no room to offset)
+                x:
+                  typeof window !== "undefined" && window.innerWidth < 768
+                    ? "0%"
+                    : "28%",
+                scale:
+                  typeof window !== "undefined" && window.innerWidth < 768
+                    ? 0.85
+                    : 1,
+              }
+        }
+        initial={
+          typeof window !== "undefined" && window.innerWidth < 768
+            ? { x: "0%", scale: 0.85 }
+            : { x: "28%", scale: 1 }
+        }
+        transition={{ duration: 1.1, ease: [0.32, 0.72, 0, 1] }}
+        style={{ position: "absolute", inset: 0 }}
+      >
         <Globe ref={globeRef} />
-      </div>
+      </_motion.div>
 
       {/* Landing hero — shows until Explore is clicked */}
       <AnimatePresence>
@@ -67,8 +90,7 @@ export default function MapPage() {
           >
             <FilterBar />
             <Sidebar />
-
-            {/* Analytics nav */}
+            <AgentPanel />
             <button
               onClick={() => navigate("/analytics")}
               style={{
