@@ -78,7 +78,7 @@ function EmissionBar({ value, color }) {
   );
 }
 
-export function Sidebar() {
+export function Sidebar({ isMobile }) {
   const selectedNode = useMapStore((s) => s.selectedNode);
   const clearSelection = useMapStore((s) => s.clearSelection);
 
@@ -97,12 +97,13 @@ export function Sidebar() {
             position: "absolute",
             top: 0,
             right: 0,
-            width: 320,
+            width: isMobile ? "100%" : 320,
+            maxWidth: isMobile ? "100%" : "50vw",
             height: "100vh",
             background: "rgba(10,10,15,0.92)",
             borderLeft: `1px solid ${color}33`,
             backdropFilter: "blur(12px)",
-            padding: "32px 24px",
+            padding: isMobile ? "20px 16px" : "32px 24px",
             display: "flex",
             flexDirection: "column",
             gap: 20,
@@ -149,7 +150,7 @@ export function Sidebar() {
             </div>
             <h2
               style={{
-                fontSize: 18,
+                fontSize: isMobile ? 16 : 18,
                 fontWeight: 700,
                 color: "#fff",
                 margin: 0,

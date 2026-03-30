@@ -4,7 +4,7 @@ import gsap from "gsap";
 
 export function Loader() {
   const { progress, active } = useProgress();
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef(null);
   const barRef = useRef(null);
   const textRef = useRef(null);
 

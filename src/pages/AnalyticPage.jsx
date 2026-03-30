@@ -97,11 +97,13 @@ export default function AnalyticsPage() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
       style={{
+        height: "100vh",
         background: "#0a0a0f",
         color: "#fff",
         fontFamily: "Segoe UI, sans-serif",
         padding: "0 0 80px",
         boxSizing: "border-box",
+        overflowY: "auto",
       }}
     >
       {/* Top nav */}

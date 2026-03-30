@@ -376,12 +376,402 @@
         "certifications": []
       },
       "kpi": {
-        "perfectOrderRate": 2.50,
+        "perfectOrderRate": 2.5,
         "cashToCashDays": 30,
         "inventoryTurnover": 6.5,
         "daysPayableOutstanding": 58,
         "daysSalesOutstanding": 18,
         "daysInventoryOutstanding": 50
+      }
+    },
+    {
+      "id": "s11",
+      "name": "Aba Textile Cooperative",
+      "country": "Nigeria",
+      "city": "Aba",
+      "lat": 5.1073,
+      "lng": 7.3667,
+      "emission": 28,
+      "level": "moderate",
+      "products": ["Wax Print Fabric", "Cotton Cloth"],
+      "telemetry": {
+        "inventoryLevel": 55,
+        "leadTimeDays": 11,
+        "onTimeDeliveryRate": 0.82,
+        "disruption": "logistics_delay",
+        "riskScore": 44
+      },
+      "iso_id": "UN/CEFACT:NG-ABA-S11-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-ABA-S11-2026",
+        "issued_date": "2026-01-28",
+        "regulation": "EU 2024/1781",
+        "materials": [
+          { "name": "Cotton", "origin": "Nigeria", "recycled_pct": 42 },
+          { "name": "Dye", "origin": "India", "recycled_pct": 15 }
+        ],
+        "scope3_kg_co2e_per_unit": 3.2,
+        "carbon_border_adjustment": false,
+        "certifications": ["GOTS"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.78,
+        "cashToCashDays": 42,
+        "inventoryTurnover": 5.1,
+        "daysPayableOutstanding": 35,
+        "daysSalesOutstanding": 45,
+        "daysInventoryOutstanding": 48
+      }
+    },
+    {
+      "id": "s12",
+      "name": "Delhi BioPharma Ltd",
+      "country": "India",
+      "city": "New Delhi",
+      "lat": 28.7041,
+      "lng": 77.1025,
+      "emission": 38,
+      "level": "moderate",
+      "products": ["Antibiotics", "Vitamins"],
+      "telemetry": {
+        "inventoryLevel": 48,
+        "leadTimeDays": 14,
+        "onTimeDeliveryRate": 0.85,
+        "disruption": "regulatory_hold",
+        "riskScore": 52
+      },
+      "iso_id": "UN/CEFACT:IN-DEL-S12-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:IN-DEL-S12-2026",
+        "issued_date": "2026-01-15",
+        "materials": [
+          {
+            "name": "Active Pharmaceutical",
+            "origin": "India",
+            "recycled_pct": 25
+          },
+          { "name": "Gelatin", "origin": "Germany", "recycled_pct": 30 }
+        ],
+        "scope3_kg_co2e_per_unit": 2.4,
+        "carbon_border_adjustment": false,
+        "certifications": ["GMP", "ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.92,
+        "cashToCashDays": 35,
+        "inventoryTurnover": 4.8,
+        "daysPayableOutstanding": 28,
+        "daysSalesOutstanding": 32,
+        "daysInventoryOutstanding": 42
+      }
+    },
+    {
+      "id": "s13",
+      "name": "Montreal Industrial Supply",
+      "country": "Canada",
+      "city": "Montreal",
+      "lat": 45.5017,
+      "lng": -73.5673,
+      "emission": 42,
+      "level": "moderate",
+      "products": ["Machine Tools", "Hydraulics"],
+      "telemetry": {
+        "inventoryLevel": 34,
+        "leadTimeDays": 15,
+        "onTimeDeliveryRate": 0.87,
+        "disruption": "border_hold",
+        "riskScore": 48
+      },
+      "iso_id": "UN/CEFACT:CA-MON-S13-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:CA-MON-S13-2026",
+        "issued_date": "2026-01-22",
+        "materials": [
+          { "name": "Steel Alloy", "origin": "Canada", "recycled_pct": 45 },
+          { "name": "Aluminum", "origin": "USA", "recycled_pct": 50 }
+        ],
+        "scope3_kg_co2e_per_unit": 3.8,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 9001", "ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.88,
+        "cashToCashDays": 32,
+        "inventoryTurnover": 5.3,
+        "daysPayableOutstanding": 40,
+        "daysSalesOutstanding": 35,
+        "daysInventoryOutstanding": 45
+      }
+    },
+    {
+      "id": "s14",
+      "name": "Ho Chi Minh Tech Makers",
+      "country": "Vietnam",
+      "city": "Ho Chi Minh City",
+      "lat": 10.8231,
+      "lng": 106.6297,
+      "emission": 33,
+      "level": "moderate",
+      "products": ["Circuit Boards", "Mobile Components"],
+      "telemetry": {
+        "inventoryLevel": 61,
+        "leadTimeDays": 9,
+        "onTimeDeliveryRate": 0.89,
+        "disruption": "port_congestion",
+        "riskScore": 41
+      },
+      "iso_id": "UN/CEFACT:VN-HCM-S14-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:VN-HCM-S14-2026",
+        "issued_date": "2026-02-05",
+        "materials": [
+          { "name": "Copper", "origin": "Vietnam", "recycled_pct": 35 },
+          { "name": "Rare Earth", "origin": "China", "recycled_pct": 20 }
+        ],
+        "scope3_kg_co2e_per_unit": 2.9,
+        "carbon_border_adjustment": true,
+        "certifications": ["ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.85,
+        "cashToCashDays": 38,
+        "inventoryTurnover": 6.2,
+        "daysPayableOutstanding": 32,
+        "daysSalesOutstanding": 40,
+        "daysInventoryOutstanding": 50
+      }
+    },
+    {
+      "id": "s15",
+      "name": "Johannesburg Logistics Hub",
+      "country": "South Africa",
+      "city": "Johannesburg",
+      "lat": -26.1045,
+      "lng": 28.0655,
+      "emission": 51,
+      "level": "moderate",
+      "products": ["Warehouse Services", "Distribution"],
+      "telemetry": {
+        "inventoryLevel": 72,
+        "leadTimeDays": 7,
+        "onTimeDeliveryRate": 0.91,
+        "disruption": "none",
+        "riskScore": 32
+      },
+      "iso_id": "UN/CEFACT:ZA-JOH-S15-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:ZA-JOH-S15-2026",
+        "issued_date": "2026-01-20",
+        "materials": [
+          {
+            "name": "Infrastructure",
+            "origin": "South Africa",
+            "recycled_pct": 60
+          }
+        ],
+        "scope3_kg_co2e_per_unit": 2.1,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 9001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.94,
+        "cashToCashDays": 28,
+        "inventoryTurnover": 7.5,
+        "daysPayableOutstanding": 25,
+        "daysSalesOutstanding": 22,
+        "daysInventoryOutstanding": 38
+      }
+    },
+    {
+      "id": "s16",
+      "name": "Alexandria Agro Export",
+      "country": "Egypt",
+      "city": "Alexandria",
+      "lat": 31.2965,
+      "lng": 29.9425,
+      "emission": 29,
+      "level": "moderate",
+      "products": ["Citrus Fruits", "Tomatoes", "Olive Oil"],
+      "telemetry": {
+        "inventoryLevel": 45,
+        "leadTimeDays": 8,
+        "onTimeDeliveryRate": 0.86,
+        "disruption": "seasonal_peak",
+        "riskScore": 39
+      },
+      "iso_id": "UN/CEFACT:EG-ALX-S16-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:EG-ALX-S16-2026",
+        "issued_date": "2026-01-10",
+        "materials": [
+          { "name": "Organic Produce", "origin": "Egypt", "recycled_pct": 80 }
+        ],
+        "scope3_kg_co2e_per_unit": 1.8,
+        "carbon_border_adjustment": false,
+        "certifications": ["EU Organic"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.82,
+        "cashToCashDays": 25,
+        "inventoryTurnover": 8.3,
+        "daysPayableOutstanding": 20,
+        "daysSalesOutstanding": 18,
+        "daysInventoryOutstanding": 28
+      }
+    },
+    {
+      "id": "s17",
+      "name": "Singapore Electronics Hub",
+      "country": "Singapore",
+      "city": "Singapore",
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "emission": 31,
+      "level": "eco",
+      "products": ["Memory Chips", "Semiconductors"],
+      "telemetry": {
+        "inventoryLevel": 58,
+        "leadTimeDays": 6,
+        "onTimeDeliveryRate": 0.96,
+        "disruption": "none",
+        "riskScore": 15
+      },
+      "iso_id": "UN/CEFACT:SG-SGP-S17-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:SG-SGP-S17-2026",
+        "issued_date": "2026-01-08",
+        "materials": [
+          { "name": "Silicon", "origin": "Taiwan", "recycled_pct": 48 },
+          { "name": "Copper", "origin": "Singapore", "recycled_pct": 42 }
+        ],
+        "scope3_kg_co2e_per_unit": 1.6,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 14001", "GRS 4.0"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.97,
+        "cashToCashDays": 22,
+        "inventoryTurnover": 8.1,
+        "daysPayableOutstanding": 18,
+        "daysSalesOutstanding": 20,
+        "daysInventoryOutstanding": 35
+      }
+    },
+    {
+      "id": "s18",
+      "name": "Mexico City Auto Parts",
+      "country": "Mexico",
+      "city": "Mexico City",
+      "lat": 19.4326,
+      "lng": -99.1332,
+      "emission": 47,
+      "level": "moderate",
+      "products": ["Engine Blocks", "Transmission Parts"],
+      "telemetry": {
+        "inventoryLevel": 39,
+        "leadTimeDays": 12,
+        "onTimeDeliveryRate": 0.84,
+        "disruption": "plant_maintenance",
+        "riskScore": 46
+      },
+      "iso_id": "UN/CEFACT:MX-MEX-S18-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:MX-MEX-S18-2026",
+        "issued_date": "2026-02-02",
+        "materials": [
+          { "name": "Cast Iron", "origin": "Mexico", "recycled_pct": 55 },
+          { "name": "Aluminum", "origin": "Mexico", "recycled_pct": 38 }
+        ],
+        "scope3_kg_co2e_per_unit": 3.5,
+        "carbon_border_adjustment": false,
+        "certifications": ["IATF 16949"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.8,
+        "cashToCashDays": 36,
+        "inventoryTurnover": 5.9,
+        "daysPayableOutstanding": 38,
+        "daysSalesOutstanding": 32,
+        "daysInventoryOutstanding": 48
+      }
+    },
+    {
+      "id": "s19",
+      "name": "Istanbul Materials Trading",
+      "country": "Turkey",
+      "city": "Istanbul",
+      "lat": 41.0082,
+      "lng": 28.9784,
+      "emission": 44,
+      "level": "moderate",
+      "products": ["Ceramic Tiles", "Stone Materials"],
+      "telemetry": {
+        "inventoryLevel": 52,
+        "leadTimeDays": 10,
+        "onTimeDeliveryRate": 0.88,
+        "disruption": "customs_delay",
+        "riskScore": 43
+      },
+      "iso_id": "UN/CEFACT:TR-IST-S19-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:TR-IST-S19-2026",
+        "issued_date": "2026-01-25",
+        "materials": [
+          { "name": "Clay", "origin": "Turkey", "recycled_pct": 35 },
+          { "name": "Stone", "origin": "Turkey", "recycled_pct": 45 }
+        ],
+        "scope3_kg_co2e_per_unit": 2.7,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 14001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.83,
+        "cashToCashDays": 40,
+        "inventoryTurnover": 4.9,
+        "daysPayableOutstanding": 35,
+        "daysSalesOutstanding": 38,
+        "daysInventoryOutstanding": 52
+      }
+    },
+    {
+      "id": "s20",
+      "name": "Port Harcourt Logistics Central",
+      "country": "Nigeria",
+      "city": "Port Harcourt",
+      "lat": 4.7755,
+      "lng": 7.0147,
+      "emission": 36,
+      "level": "moderate",
+      "products": ["Port Services", "Container Handling"],
+      "telemetry": {
+        "inventoryLevel": 68,
+        "leadTimeDays": 9,
+        "onTimeDeliveryRate": 0.9,
+        "disruption": "weather_risk",
+        "riskScore": 38
+      },
+      "iso_id": "UN/CEFACT:NG-PHC-S20-2026",
+      "dpp": {
+        "passport_id": "UN/CEFACT:NG-PHC-S20-2026",
+        "issued_date": "2026-02-08",
+        "materials": [
+          {
+            "name": "Port Infrastructure",
+            "origin": "Nigeria",
+            "recycled_pct": 65
+          }
+        ],
+        "scope3_kg_co2e_per_unit": 1.9,
+        "carbon_border_adjustment": false,
+        "certifications": ["ISO 9001"]
+      },
+      "kpi": {
+        "perfectOrderRate": 0.91,
+        "cashToCashDays": 26,
+        "inventoryTurnover": 7.8,
+        "daysPayableOutstanding": 22,
+        "daysSalesOutstanding": 25,
+        "daysInventoryOutstanding": 40
       }
     }
   ],
@@ -525,6 +915,76 @@
       "to": "s3",
       "type": "land",
       "desc": "Onitsha to Enugu Distribution"
+    },
+    {
+      "id": "r11",
+      "from": "s11",
+      "to": "s2",
+      "type": "sea",
+      "desc": "Aba Textile to Berlin - European Fashion Supply"
+    },
+    {
+      "id": "r12",
+      "from": "s12",
+      "to": "s1",
+      "type": "sea",
+      "desc": "Delhi Pharma to Lagos - Medical Import Route"
+    },
+    {
+      "id": "r13",
+      "from": "s13",
+      "to": "s6",
+      "type": "sea",
+      "desc": "Montreal Industrial to Shanghai - Tool Trade"
+    },
+    {
+      "id": "r14",
+      "from": "s14",
+      "to": "s17",
+      "type": "air",
+      "desc": "Ho Chi Minh Tech to Singapore - Express Electronics"
+    },
+    {
+      "id": "r15",
+      "from": "s15",
+      "to": "s9",
+      "type": "air",
+      "desc": "Johannesburg Hub to Abuja - Cross-Africa Logistics"
+    },
+    {
+      "id": "r16",
+      "from": "s16",
+      "to": "s5",
+      "type": "sea",
+      "desc": "Alexandria Agro to Seoul - Organic Pineapple Export"
+    },
+    {
+      "id": "r17",
+      "from": "s17",
+      "to": "s8",
+      "type": "sea",
+      "desc": "Singapore Hub to Perth - Tech Components Supply"
+    },
+    {
+      "id": "r18",
+      "from": "s18",
+      "to": "s10",
+      "type": "land",
+      "desc": "Mexico City Auto to Houston - USMCA Parts Trade"
+    },
+    {
+      "id": "r19",
+      "from": "s19",
+      "to": "s4",
+      "type": "sea",
+      "desc": "Istanbul Materials to Manaus - Construction Supply"
+    },
+    {
+      "id": "r20",
+      "from": "s20",
+      "to": "s11",
+      "type": "land",
+      "desc": "Port Harcourt Central to Aba - Naija Domestic Goods Movement"
     }
   ]
 }

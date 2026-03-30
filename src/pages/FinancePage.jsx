@@ -29,7 +29,7 @@ const avgKpi = {
     100
   ).toFixed(1),
   cashToCashDays: Math.round(
-    suppliersWithKpi.reduce((a, s) => a + s.kpi.cashToCachDays, 0) /
+    suppliersWithKpi.reduce((a, s) => a + s.kpi.cashToCashDays, 0) /
       suppliersWithKpi.length,
   ),
   inventoryTurnover: (
@@ -42,12 +42,12 @@ const radarData = suppliersWithKpi.map((s) => ({
   supplier: s.city,
   "Order Rate": Math.round(s.kpi.perfectOrderRate * 100),
   "Inv. Turn": Math.round(s.kpi.inventoryTurnover * 10),
-  "C2C Speed": Math.round(100 - s.kpi.cashToCachDays),
+  "C2C Speed": Math.round(100 - s.kpi.cashToCashDays),
 }));
 
 const scatterData = suppliersWithKpi.map((s) => ({
   name: s.name,
-  x: s.kpi.cashToCachDays,
+  x: s.kpi.cashToCashDays,
   y: Math.round(s.kpi.perfectOrderRate * 100),
   z: s.kpi.inventoryTurnover * 10,
   emission: s.emission,
@@ -78,7 +78,7 @@ export default function FinancePage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       style={{
-        minHeight: "100vh",
+        height: "100vh",
         background: "#0a0a0f",
         color: "#fff",
         fontFamily: "Segoe UI, sans-serif",
@@ -445,10 +445,10 @@ export default function FinancePage() {
                       style={{
                         padding: "12px",
                         color:
-                          s.kpi.cashToCachDays <= 35 ? "#00FF88" : "#FFB347",
+                          s.kpi.cashToCashDays <= 35 ? "#00FF88" : "#FFB347",
                       }}
                     >
-                      {s.kpi.cashToCachDays}d
+                      {s.kpi.cashToCashDays}d
                     </td>
                     <td style={{ padding: "12px", color: "#aaa" }}>
                       {s.kpi.inventoryTurnover}x

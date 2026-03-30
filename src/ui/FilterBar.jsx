@@ -10,7 +10,7 @@ const FILTERS = [
   { label: "🔴 High", value: "high" },
 ];
 
-export function FilterBar() {
+export function FilterBar({ isMobile }) {
   const [active, setActive] = useState("all");
   const setActiveFilter = useMapStore((s) => s.setActiveFilter);
   const location = useLocation();
@@ -30,18 +30,21 @@ export function FilterBar() {
       transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
       style={{
         position: "absolute",
-        bottom: 32,
-        left: "5%",
+        bottom: isMobile ? 100 : 32,
+        left: "50%",
         transform: "translateX(-50%)",
         display: "flex",
-        gap: 6,
+        gap: isMobile ? 4 : 6,
         background: "rgba(10,10,15,0.85)",
         border: "1px solid #2a2a2e",
         borderRadius: 12,
-        padding: "6px 8px",
+        padding: isMobile ? "4px 6px" : "6px 8px",
         backdropFilter: "blur(12px)",
         zIndex: 100,
         whiteSpace: "nowrap",
+        flexWrap: isMobile ? "wrap" : "nowrap",
+        maxWidth: isMobile ? "90vw" : "auto",
+        justifyContent: "center",
       }}
     >
       {FILTERS.map((f) => (
@@ -55,9 +58,9 @@ export function FilterBar() {
                 ? "1px solid #FF6B6B55"
                 : "1px solid transparent",
             borderRadius: 8,
-            padding: "6px 16px",
+            padding: isMobile ? "4px 10px" : "6px 16px",
             color: active === f.value ? "#FF6B6B" : "#666",
-            fontSize: 12,
+            fontSize: isMobile ? 11 : 12,
             fontWeight: 600,
             cursor: "pointer",
             transition: "all 0.2s",

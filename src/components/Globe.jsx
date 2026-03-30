@@ -1,7 +1,8 @@
-import { forwardRef } from "react";
 import GlobeGL from "react-globe.gl";
 import data from "../data/supplyChain.json";
 import { useMapStore } from "../store/useMapStore";
+import { forwardRef } from "react";
+
 const LEVEL_COLORS = {
   eco: "#00FF88",
   moderate: "#FFB347",
@@ -14,52 +15,33 @@ const ROUTE_COLORS = {
   land: "#00FF88",
 };
 
-const suppliersWithCoords = data.suppliers.filter(
-  (s) => typeof s.lat === "number" && typeof s.lng === "number",
-);
-
-const heatmapData = suppliersWithCoords.map((s) => ({
-  lat: s.lat,
-  lng: s.lng,
-  weight: s.telemetry?.riskScore ?? s.emission ?? 0,
-}));
-
 const arcs = data.routes
+  .filter((route) => {
+    const fromExists = data.suppliers.some((s) => s.id === route.from);
+    const toExists = data.suppliers.some((s) => s.id === route.to);
+    return fromExists && toExists;
+  })
   .map((route) => {
     const from = data.suppliers.find((s) => s.id === route.from);
     const to = data.suppliers.find((s) => s.id === route.to);
-    if (
-      !from ||
-      !to ||
-      typeof from.lat !== "number" ||
-      typeof from.lng !== "number" ||
-      typeof to.lat !== "number" ||
-      typeof to.lng !== "number"
-    ) {
-      return null;
-    }
     return {
       startLat: from.lat,
       startLng: from.lng,
       endLat: to.lat,
       endLng: to.lng,
-      color: ROUTE_COLORS[route.type] || "#ffffff",
+      color: ROUTE_COLORS[route.type],
       type: route.type,
     };
-  })
-  .filter(Boolean);
-export const Globe = forwardRef(function Globe({ width, height }, ref) {
+  });
+
+export const Globe = forwardRef(function Globe(_, ref) {
   const setSelectedNode = useMapStore((s) => s.setSelectedNode);
   const activeFilter = useMapStore((s) => s.activeFilter);
 
-  const filteredSuppliersBase =
+  const filteredSuppliers =
     activeFilter === "all"
       ? data.suppliers
       : data.suppliers.filter((s) => s.level === activeFilter);
-
-  const filteredSuppliers = filteredSuppliersBase.filter(
-    (s) => typeof s.lat === "number" && typeof s.lng === "number",
-  );
 
   return (
     <GlobeGL
@@ -70,19 +52,6 @@ export const Globe = forwardRef(function Globe({ width, height }, ref) {
       atmosphereColor="#1a6fff"
       atmosphereAltitude={0.18}
       showAtmosphere={true}
-      heatmapsData={[heatmapData]}
-      heatmapPointLat="lat"
-      heatmapPointLng="lng"
-      heatmapPointWeight="weight"
-      heatmapBandwidth={4.5}
-      heatmapColorFn={(t) =>
-        t > 0.7
-          ? `rgba(255,70,70,${t * 0.7})`
-          : t > 0.4
-            ? `rgba(255,180,70,${t * 0.6})`
-            : `rgba(0,255,136,${t * 0.5})`
-      }
-      heatmapTopAltitude={0.06}
       pointsData={filteredSuppliers}
       pointLat={(s) => s.lat}
       pointLng={(s) => s.lng}
@@ -125,17 +94,11 @@ export const Globe = forwardRef(function Globe({ width, height }, ref) {
       ringLat={(s) => s.lat}
       ringLng={(s) => s.lng}
       ringColor={(s) => LEVEL_COLORS[s.level]}
-      ringMaxRadius={(s) => {
-        const inv = s.telemetry?.inventoryLevel ?? 50;
-        return inv < 25 ? 6 : inv < 50 ? 4 : 2.5;
-      }}
-      ringPropagationSpeed={(s) => {
-        const risk = s.telemetry?.riskScore ?? 50;
-        return risk > 80 ? 4 : risk > 50 ? 2.5 : 1.5;
-      }}
+      ringMaxRadius={3}
+      ringPropagationSpeed={2}
       ringRepeatPeriod={1000}
-      width={width || window.innerWidth}
-      height={height || window.innerHeight}
+      width={window.innerWidth}
+      height={window.innerHeight}
     />
   );
 });

@@ -16,7 +16,7 @@ const ACTION_LABELS = {
   MONITOR: "👁 Monitor",
 };
 
-export function AgentPanel() {
+export function AgentPanel({ isMobile }) {
   const {
     alerts,
     pendingActions,
@@ -38,17 +38,19 @@ export function AgentPanel() {
       transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
       style={{
         position: "absolute",
-        top: 80,
-        left: 20,
-        width: 300,
-        maxHeight: "70vh",
+        top: isMobile ? "auto" : 80,
+        bottom: isMobile ? 20 : "auto",
+        left: isMobile ? 10 : 20,
+        right: isMobile ? 10 : "auto",
+        width: isMobile ? "calc(100% - 20px)" : 300,
+        maxHeight: isMobile ? "35vh" : "70vh",
         overflowY: "auto",
         background: "rgba(10,10,15,0.92)",
         border: "1px solid #2a2a2e",
         borderRadius: 12,
         backdropFilter: "blur(12px)",
         zIndex: 200,
-        padding: "16px",
+        padding: isMobile ? "12px" : "16px",
         fontFamily: "Segoe UI, sans-serif",
       }}
     >
@@ -64,7 +66,7 @@ export function AgentPanel() {
         <div>
           <div
             style={{
-              fontSize: 11,
+              fontSize: isMobile ? 10 : 11,
               color: "#FF6B6B",
               letterSpacing: 2,
               textTransform: "uppercase",
@@ -74,7 +76,7 @@ export function AgentPanel() {
           </div>
           <div
             style={{
-              fontSize: 13,
+              fontSize: isMobile ? 12 : 13,
               fontWeight: 700,
               color: "#fff",
               marginTop: 2,
