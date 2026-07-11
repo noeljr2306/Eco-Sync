@@ -22,9 +22,8 @@ This project leverages a cutting-edge tech stack to deliver a smooth, performant
 ## 🌟 Features
 
 - **Interactive 3D Globe:** Explore supply chain nodes and connections worldwide 🗺️
-- **Real-Time Analytics:** Dive into data with dynamic charts and filters 📉
+- **Analytics:** Dive into data with dynamic charts and filters 📉
 - **Supply Chain Mapping:** Visualize nodes, routes, and environmental metrics 🌱
-- **Responsive Design:** Works seamlessly on desktop and mobile devices 📱
 - **Performance Optimized:** Fast loading with modern web technologies 🚀
 
 ## 🌱 Purpose

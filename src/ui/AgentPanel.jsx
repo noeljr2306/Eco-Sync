@@ -1,24 +1,31 @@
 import { useEffect } from "react";
 import { motion as _motion, AnimatePresence } from "framer-motion";
+import {
+  Repeat,
+  Package,
+  TriangleAlert,
+  Eye,
+  CheckCircle2,
+} from "lucide-react";
 import { useAgentStore } from "../store/useAgentStore";
 import data from "../data/supplyChain.json";
+import { theme } from "../utils/theme";
 
 const SEVERITY_COLORS = {
-  critical: "#FF6B6B",
-  warning: "#FFB347",
-  info: "#00aaff",
+  critical: theme.color.containerRed,
+  warning: theme.color.safetyYellow,
+  info: theme.color.industrialBlueLight,
 };
 
-const ACTION_LABELS = {
-  REROUTE: "🔀 Reroute",
-  REORDER: "📦 Reorder",
-  ESCALATE: "🚨 Escalate",
-  MONITOR: "👁 Monitor",
+const ACTION_META = {
+  REROUTE: { label: "Reroute", Icon: Repeat },
+  REORDER: { label: "Reorder", Icon: Package },
+  ESCALATE: { label: "Escalate", Icon: TriangleAlert },
+  MONITOR: { label: "Monitor", Icon: Eye },
 };
 
 export function AgentPanel({ isMobile }) {
   const {
-    alerts,
     pendingActions,
     agentRunning,
     runAgent,
@@ -26,16 +33,15 @@ export function AgentPanel({ isMobile }) {
     dismissAction,
   } = useAgentStore();
 
-  // Auto-run agent on mount
   useEffect(() => {
     runAgent(data.suppliers);
-  }, []);
+  }, [runAgent]);
 
   return (
     <_motion.div
-      initial={{ x: -320, opacity: 0 }}
+      initial={{ x: -280, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+      transition={{ delay: 0.5, type: "spring", stiffness: 110, damping: 18 }}
       style={{
         position: "absolute",
         top: isMobile ? "auto" : 80,
@@ -45,16 +51,15 @@ export function AgentPanel({ isMobile }) {
         width: isMobile ? "calc(100% - 20px)" : 300,
         maxHeight: isMobile ? "35vh" : "70vh",
         overflowY: "auto",
-        background: "rgba(10,10,15,0.92)",
-        border: "1px solid #2a2a2e",
-        borderRadius: 12,
-        backdropFilter: "blur(12px)",
+        background: theme.color.panel,
+        border: `1px solid ${theme.color.border}`,
+        borderRadius: theme.radius.md,
         zIndex: 200,
-        padding: isMobile ? "12px" : "16px",
-        fontFamily: "Segoe UI, sans-serif",
+        padding: isMobile ? 14 : 16,
+        fontFamily: theme.font.family,
+        boxShadow: theme.shadow.panel,
       }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -66,19 +71,20 @@ export function AgentPanel({ isMobile }) {
         <div>
           <div
             style={{
-              fontSize: isMobile ? 10 : 11,
-              color: "#FF6B6B",
-              letterSpacing: 2,
+              fontSize: 10,
+              color: theme.color.textMuted,
+              letterSpacing: 1.5,
               textTransform: "uppercase",
+              fontWeight: 600,
             }}
           >
             Autonomous Agent
           </div>
           <div
             style={{
-              fontSize: isMobile ? 12 : 13,
+              fontSize: 13,
               fontWeight: 700,
-              color: "#fff",
+              color: theme.color.textPrimary,
               marginTop: 2,
             }}
           >
@@ -87,103 +93,132 @@ export function AgentPanel({ isMobile }) {
         </div>
         <div
           style={{
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: agentRunning ? "#FFB347" : "#00FF88",
-            boxShadow: `0 0 8px ${agentRunning ? "#FFB347" : "#00FF88"}`,
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 10,
+            color: theme.color.textMuted,
+            fontWeight: 600,
           }}
-        />
-      </div>
-
-      <div style={{ fontSize: 11, color: "#444", marginBottom: 12 }}>
-        {pendingActions.length} actions awaiting approval
-      </div>
-
-      {/* Pending Actions */}
-      <AnimatePresence>
-        {pendingActions.map((alert) => (
-          <_motion.div
-            key={alert.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, x: -20 }}
+        >
+          <span
             style={{
-              background: "#18181c",
-              border: `1px solid ${SEVERITY_COLORS[alert.severity]}44`,
-              borderLeft: `3px solid ${SEVERITY_COLORS[alert.severity]}`,
-              borderRadius: 8,
-              padding: "10px 12px",
-              marginBottom: 8,
+              width: 7,
+              height: 7,
+              borderRadius: "50%",
+              background: agentRunning
+                ? theme.color.safetyYellow
+                : theme.color.emerald,
             }}
-          >
-            <div
+          />
+          {agentRunning ? "RUNNING" : "IDLE"}
+        </div>
+      </div>
+
+      <div
+        style={{ fontSize: 11, color: theme.color.textMuted, marginBottom: 12 }}
+      >
+        {pendingActions.length} action{pendingActions.length === 1 ? "" : "s"}{" "}
+        awaiting approval
+      </div>
+
+      <AnimatePresence>
+        {pendingActions.map((alert) => {
+          const meta = ACTION_META[alert.action];
+          const color = SEVERITY_COLORS[alert.severity];
+          return (
+            <_motion.div
+              key={alert.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: -16 }}
               style={{
-                fontSize: 11,
-                fontWeight: 700,
-                color: SEVERITY_COLORS[alert.severity],
-                marginBottom: 4,
-              }}
-            >
-              {ACTION_LABELS[alert.action]}
-            </div>
-            <div
-              style={{
-                fontSize: 11,
-                color: "#ccc",
-                lineHeight: 1.5,
+                background: theme.color.panelAlt,
+                border: `1px solid ${theme.color.border}`,
+                borderLeft: `3px solid ${color}`,
+                borderRadius: theme.radius.sm,
+                padding: "10px 12px",
                 marginBottom: 8,
               }}
             >
-              {alert.message}
-            </div>
-            <div style={{ display: "flex", gap: 6 }}>
-              <button
-                onClick={() => approveAction(alert.id)}
+              <div
                 style={{
-                  flex: 1,
-                  background: `${SEVERITY_COLORS[alert.severity]}22`,
-                  border: `1px solid ${SEVERITY_COLORS[alert.severity]}55`,
-                  borderRadius: 6,
-                  padding: "5px 0",
-                  color: SEVERITY_COLORS[alert.severity],
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
                   fontSize: 11,
-                  fontWeight: 600,
-                  cursor: "pointer",
+                  fontWeight: 700,
+                  color,
+                  marginBottom: 6,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.03em",
                 }}
               >
-                Approve
-              </button>
-              <button
-                onClick={() => dismissAction(alert.id)}
+                <meta.Icon size={13} strokeWidth={2.25} />
+                {meta.label}
+              </div>
+              <div
                 style={{
-                  flex: 1,
-                  background: "none",
-                  border: "1px solid #2a2a2e",
-                  borderRadius: 6,
-                  padding: "5px 0",
-                  color: "#555",
-                  fontSize: 11,
-                  cursor: "pointer",
+                  fontSize: 11.5,
+                  color: theme.color.textSecondary,
+                  lineHeight: 1.5,
+                  marginBottom: 10,
                 }}
               >
-                Dismiss
-              </button>
-            </div>
-          </_motion.div>
-        ))}
+                {alert.message}
+              </div>
+              <div style={{ display: "flex", gap: 6 }}>
+                <button
+                  onClick={() => approveAction(alert.id)}
+                  style={{
+                    flex: 1,
+                    background: theme.color.panel,
+                    border: `1px solid ${color}66`,
+                    borderRadius: theme.radius.sm,
+                    padding: "6px 0",
+                    color,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => dismissAction(alert.id)}
+                  style={{
+                    flex: 1,
+                    background: "none",
+                    border: `1px solid ${theme.color.border}`,
+                    borderRadius: theme.radius.sm,
+                    padding: "6px 0",
+                    color: theme.color.textMuted,
+                    fontSize: 11,
+                    cursor: "pointer",
+                  }}
+                >
+                  Dismiss
+                </button>
+              </div>
+            </_motion.div>
+          );
+        })}
       </AnimatePresence>
 
       {pendingActions.length === 0 && (
         <div
           style={{
-            textAlign: "center",
-            color: "#333",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 6,
+            color: theme.color.textMuted,
             fontSize: 12,
             padding: "20px 0",
           }}
         >
-          ✓ All actions resolved
+          <CheckCircle2 size={14} />
+          All actions resolved
         </div>
       )}
     </_motion.div>

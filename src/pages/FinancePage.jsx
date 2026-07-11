@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion as _motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowLeft, LineChart } from "lucide-react";
 import {
   RadarChart,
   Radar,
@@ -17,6 +18,8 @@ import {
   ZAxis,
 } from "recharts";
 import data from "../data/supplyChain.json";
+import { APP_COPY } from "../utils/constants";
+import { theme } from "../utils/theme";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,8 +53,29 @@ const scatterData = suppliersWithKpi.map((s) => ({
   x: s.kpi.cashToCashDays,
   y: Math.round(s.kpi.perfectOrderRate * 100),
   z: s.kpi.inventoryTurnover * 10,
-  emission: s.emission,
 }));
+
+const navButtonStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  background: theme.color.panel,
+  border: `1px solid ${theme.color.border}`,
+  borderRadius: theme.radius.md,
+  padding: "8px 16px",
+  color: theme.color.textSecondary,
+  fontSize: 12,
+  fontWeight: 600,
+  cursor: "pointer",
+  fontFamily: theme.font.family,
+};
+
+const panelStyle = {
+  background: theme.color.panel,
+  borderRadius: theme.radius.md,
+  padding: 24,
+  border: `1px solid ${theme.color.border}`,
+};
 
 export default function FinancePage() {
   const navigate = useNavigate();
@@ -60,12 +84,12 @@ export default function FinancePage() {
   useEffect(() => {
     gsap.fromTo(
       ".finance-card",
-      { y: 30, opacity: 0 },
+      { y: 24, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        stagger: 0.1,
-        duration: 0.7,
+        stagger: 0.08,
+        duration: 0.6,
         ease: "power3.out",
         scrollTrigger: { trigger: cardsRef.current, start: "top 85%" },
       },
@@ -79,9 +103,9 @@ export default function FinancePage() {
       animate={{ opacity: 1 }}
       style={{
         height: "100vh",
-        background: "#0a0a0f",
-        color: "#fff",
-        fontFamily: "Segoe UI, sans-serif",
+        background: theme.color.bgDeep,
+        color: theme.color.textPrimary,
+        fontFamily: theme.font.family,
         overflowY: "auto",
         paddingBottom: 80,
       }}
@@ -92,53 +116,50 @@ export default function FinancePage() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          background: "rgba(10,10,15,0.9)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid #1e1e24",
+          background: theme.color.bg,
+          borderBottom: `1px solid ${theme.color.border}`,
           padding: "16px clamp(20px, 4vw, 40px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 12,
         }}
       >
         <div
           style={{
-            fontSize: 16,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
             fontWeight: 700,
-            color: "#FF6B6B",
-            letterSpacing: 1,
+            letterSpacing: 0.5,
           }}
         >
-          ECO SYNC — Finance View
-        </div>
-        <div style={{ display: "flex", gap: 10 }}>
-          <button
-            onClick={() => navigate("/")}
+          <span
             style={{
-              background: "none",
-              border: "1px solid #2a2a2e",
-              borderRadius: 8,
-              padding: "7px 14px",
-              color: "#aaa",
-              fontSize: 12,
-              cursor: "pointer",
+              width: 7,
+              height: 7,
+              background: theme.color.industrialBlue,
+              borderRadius: 1,
             }}
+          />
+          {APP_COPY.title.toUpperCase()} — Finance View
+        </div>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            style={navButtonStyle}
           >
-            ← Globe
+            <ArrowLeft size={13} /> Globe
           </button>
           <button
+            type="button"
             onClick={() => navigate("/analytics")}
-            style={{
-              background: "none",
-              border: "1px solid #2a2a2e",
-              borderRadius: 8,
-              padding: "7px 14px",
-              color: "#aaa",
-              fontSize: 12,
-              cursor: "pointer",
-            }}
+            style={navButtonStyle}
           >
-            Analytics
+            <LineChart size={13} /> Analytics
           </button>
         </div>
       </div>
@@ -151,65 +172,74 @@ export default function FinancePage() {
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: 40 }}>
+        <div style={{ marginBottom: 36 }}>
           <div
             style={{
               fontSize: 11,
-              letterSpacing: 3,
-              color: "#555",
+              letterSpacing: 2.5,
+              color: theme.color.industrialBlueLight,
               textTransform: "uppercase",
               marginBottom: 8,
+              fontWeight: 700,
             }}
           >
             Financial Intelligence Layer
           </div>
           <h1
             style={{
-              fontSize: "clamp(22px,4vw,32px)",
+              fontSize: "clamp(22px,4vw,28px)",
               fontWeight: 700,
               margin: 0,
+              letterSpacing: "-0.01em",
             }}
           >
             Supply Chain KPI Dashboard
           </h1>
-          <p style={{ color: "#555", fontSize: 13, marginTop: 8 }}>
+          <p
+            style={{
+              color: theme.color.textSecondary,
+              fontSize: 13,
+              marginTop: 8,
+              lineHeight: 1.6,
+            }}
+          >
             Perfect Order Rate · Cash-to-Cash Cycle · Inventory Velocity
           </p>
         </div>
 
-        {/* KPI Headline Cards */}
+        {/* KPI Cards */}
         <div
           ref={cardsRef}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: 16,
-            marginBottom: 40,
+            gap: 14,
+            marginBottom: 36,
           }}
         >
           {[
             {
               label: "Avg Perfect Order Rate",
               value: `${avgKpi.perfectOrderRate}%`,
-              color: "#00FF88",
+              color: theme.color.emerald,
               desc: "Orders delivered perfect",
             },
             {
               label: "Avg Cash-to-Cash",
               value: `${avgKpi.cashToCashDays}d`,
-              color: "#FFB347",
+              color: theme.color.safetyYellow,
               desc: "Working capital cycle",
             },
             {
               label: "Avg Inventory Turns",
               value: avgKpi.inventoryTurnover,
-              color: "#00aaff",
+              color: theme.color.industrialBlueLight,
               desc: "Annual inventory cycles",
             },
             {
               label: "Suppliers Tracked",
               value: suppliersWithKpi.length,
-              color: "#FF6B6B",
+              color: theme.color.steel,
               desc: "With full KPI telemetry",
             },
           ].map((card) => (
@@ -217,102 +247,113 @@ export default function FinancePage() {
               key={card.label}
               className="finance-card"
               style={{
-                background: "#18181c",
-                border: `1px solid ${card.color}33`,
-                borderRadius: 12,
-                padding: "20px 22px",
+                background: theme.color.panel,
+                border: `1px solid ${theme.color.border}`,
+                borderTop: `2px solid ${card.color}`,
+                borderRadius: theme.radius.md,
+                padding: "18px 20px",
               }}
             >
               <div
                 style={{
                   fontSize: 10,
-                  color: "#555",
-                  letterSpacing: 1.5,
+                  color: theme.color.textMuted,
+                  letterSpacing: 1.2,
                   textTransform: "uppercase",
                   marginBottom: 6,
+                  fontWeight: 600,
                 }}
               >
                 {card.label}
               </div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: card.color }}>
+              <div
+                style={{
+                  fontSize: 26,
+                  fontWeight: 700,
+                  color: theme.color.textPrimary,
+                  fontFamily: theme.font.mono,
+                }}
+              >
                 {card.value}
               </div>
-              <div style={{ fontSize: 11, color: "#444", marginTop: 4 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  color: theme.color.textMuted,
+                  marginTop: 4,
+                }}
+              >
                 {card.desc}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Radar + Scatter side by side */}
+        {/* Radar + Scatter */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
             gap: 16,
-            marginBottom: 24,
+            marginBottom: 20,
           }}
         >
-          {/* Radar */}
-          <div
-            style={{
-              background: "#18181c",
-              borderRadius: 12,
-              padding: "24px",
-              border: "1px solid #2a2a2e",
-            }}
-          >
+          <div style={panelStyle}>
             <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
               Supplier Performance Radar
             </div>
-            <div style={{ fontSize: 12, color: "#555", marginBottom: 20 }}>
+            <div
+              style={{
+                fontSize: 12,
+                color: theme.color.textMuted,
+                marginBottom: 20,
+              }}
+            >
               Order rate · Inventory · C2C speed
             </div>
             <ResponsiveContainer width="100%" height={260}>
               <RadarChart data={radarData}>
-                <PolarGrid stroke="#2a2a2e" />
+                <PolarGrid stroke={theme.color.border} />
                 <PolarAngleAxis
                   dataKey="supplier"
-                  tick={{ fill: "#555", fontSize: 10 }}
+                  tick={{ fill: theme.color.textMuted, fontSize: 10 }}
                 />
                 <Radar
                   name="Order Rate"
                   dataKey="Order Rate"
-                  stroke="#00FF88"
-                  fill="#00FF88"
+                  stroke={theme.color.emerald}
+                  fill={theme.color.emerald}
                   fillOpacity={0.15}
                 />
                 <Radar
                   name="Inv. Turn"
                   dataKey="Inv. Turn"
-                  stroke="#00aaff"
-                  fill="#00aaff"
+                  stroke={theme.color.industrialBlueLight}
+                  fill={theme.color.industrialBlueLight}
                   fillOpacity={0.1}
                 />
                 <Radar
                   name="C2C Speed"
                   dataKey="C2C Speed"
-                  stroke="#FFB347"
-                  fill="#FFB347"
+                  stroke={theme.color.safetyYellow}
+                  fill={theme.color.safetyYellow}
                   fillOpacity={0.1}
                 />
               </RadarChart>
             </ResponsiveContainer>
           </div>
 
-          {/* Scatter — C2C vs Perfect Order Rate */}
-          <div
-            style={{
-              background: "#18181c",
-              borderRadius: 12,
-              padding: "24px",
-              border: "1px solid #2a2a2e",
-            }}
-          >
+          <div style={panelStyle}>
             <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
               C2C Days vs Perfect Order Rate
             </div>
-            <div style={{ fontSize: 12, color: "#555", marginBottom: 20 }}>
+            <div
+              style={{
+                fontSize: 12,
+                color: theme.color.textMuted,
+                marginBottom: 20,
+              }}
+            >
               Bubble size = inventory turnover
             </div>
             <ResponsiveContainer width="100%" height={260}>
@@ -320,10 +361,10 @@ export default function FinancePage() {
                 <XAxis
                   dataKey="x"
                   name="C2C Days"
-                  tick={{ fill: "#555", fontSize: 10 }}
+                  tick={{ fill: theme.color.textMuted, fontSize: 10 }}
                   label={{
                     value: "C2C Days",
-                    fill: "#555",
+                    fill: theme.color.textMuted,
                     fontSize: 10,
                     position: "insideBottom",
                     offset: -2,
@@ -332,10 +373,10 @@ export default function FinancePage() {
                 <YAxis
                   dataKey="y"
                   name="Order Rate %"
-                  tick={{ fill: "#555", fontSize: 10 }}
+                  tick={{ fill: theme.color.textMuted, fontSize: 10 }}
                   label={{
                     value: "Order Rate %",
-                    fill: "#555",
+                    fill: theme.color.textMuted,
                     fontSize: 10,
                     angle: -90,
                     position: "insideLeft",
@@ -345,32 +386,35 @@ export default function FinancePage() {
                 <Tooltip
                   cursor={{ strokeDasharray: "3 3" }}
                   contentStyle={{
-                    background: "#18181c",
-                    border: "1px solid #2a2a2e",
-                    borderRadius: 8,
+                    background: theme.color.panelAlt,
+                    border: `1px solid ${theme.color.border}`,
+                    borderRadius: 6,
                     fontSize: 11,
                   }}
                   formatter={(val, name) => [val, name]}
                 />
-                <Scatter data={scatterData} fill="#FF6B6B" fillOpacity={0.8} />
+                <Scatter
+                  data={scatterData}
+                  fill={theme.color.industrialBlueLight}
+                  fillOpacity={0.85}
+                />
               </ScatterChart>
             </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Per-supplier KPI Table */}
-        <div
-          style={{
-            background: "#18181c",
-            borderRadius: 12,
-            padding: "24px",
-            border: "1px solid #2a2a2e",
-          }}
-        >
+        {/* KPI Table */}
+        <div style={panelStyle}>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
             Per-Supplier KPI Breakdown
           </div>
-          <div style={{ fontSize: 12, color: "#555", marginBottom: 20 }}>
+          <div
+            style={{
+              fontSize: 12,
+              color: theme.color.textMuted,
+              marginBottom: 20,
+            }}
+          >
             Full financial telemetry per node
           </div>
           <div style={{ overflowX: "auto" }}>
@@ -383,7 +427,7 @@ export default function FinancePage() {
               }}
             >
               <thead>
-                <tr style={{ borderBottom: "1px solid #2a2a2e" }}>
+                <tr style={{ borderBottom: `1px solid ${theme.color.border}` }}>
                   {[
                     "Supplier",
                     "Perfect Order",
@@ -398,7 +442,7 @@ export default function FinancePage() {
                       style={{
                         textAlign: "left",
                         padding: "8px 12px",
-                        color: "#555",
+                        color: theme.color.textMuted,
                         fontWeight: 600,
                         fontSize: 10,
                         letterSpacing: 1,
@@ -414,14 +458,15 @@ export default function FinancePage() {
                   <tr
                     key={s.id}
                     style={{
-                      borderBottom: "1px solid #1a1a1f",
-                      background: i % 2 === 0 ? "transparent" : "#0d0d0f",
+                      borderBottom: `1px solid ${theme.color.border}`,
+                      background:
+                        i % 2 === 0 ? "transparent" : theme.color.panelAlt,
                     }}
                   >
                     <td
                       style={{
                         padding: "12px",
-                        color: "#ccc",
+                        color: theme.color.textSecondary,
                         fontWeight: 600,
                       }}
                     >
@@ -432,11 +477,12 @@ export default function FinancePage() {
                         padding: "12px",
                         color:
                           s.kpi.perfectOrderRate >= 0.85
-                            ? "#00FF88"
+                            ? theme.color.emerald
                             : s.kpi.perfectOrderRate >= 0.7
-                              ? "#FFB347"
-                              : "#FF6B6B",
+                              ? theme.color.safetyYellow
+                              : theme.color.containerRed,
                         fontWeight: 600,
+                        fontFamily: theme.font.mono,
                       }}
                     >
                       {Math.round(s.kpi.perfectOrderRate * 100)}%
@@ -445,21 +491,48 @@ export default function FinancePage() {
                       style={{
                         padding: "12px",
                         color:
-                          s.kpi.cashToCashDays <= 35 ? "#00FF88" : "#FFB347",
+                          s.kpi.cashToCashDays <= 35
+                            ? theme.color.emerald
+                            : theme.color.safetyYellow,
+                        fontFamily: theme.font.mono,
                       }}
                     >
                       {s.kpi.cashToCashDays}d
                     </td>
-                    <td style={{ padding: "12px", color: "#aaa" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                        fontFamily: theme.font.mono,
+                      }}
+                    >
                       {s.kpi.inventoryTurnover}x
                     </td>
-                    <td style={{ padding: "12px", color: "#aaa" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                        fontFamily: theme.font.mono,
+                      }}
+                    >
                       {s.kpi.daysPayableOutstanding}d
                     </td>
-                    <td style={{ padding: "12px", color: "#aaa" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                        fontFamily: theme.font.mono,
+                      }}
+                    >
                       {s.kpi.daysSalesOutstanding}d
                     </td>
-                    <td style={{ padding: "12px", color: "#aaa" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                        fontFamily: theme.font.mono,
+                      }}
+                    >
                       {s.kpi.daysInventoryOutstanding}d
                     </td>
                   </tr>

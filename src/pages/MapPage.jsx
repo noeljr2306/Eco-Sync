@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion as _motion, AnimatePresence } from "framer-motion";
+import { BarChart3 } from "lucide-react";
 import { Globe } from "../components/Globe";
 import { Sidebar } from "../ui/Sidebar";
 import { FilterBar } from "../ui/FilterBar";
@@ -8,6 +9,7 @@ import { LandingHeader } from "../ui/LandingHeader";
 import { Loader } from "../components/Loader";
 import { useMapStore } from "../store/useMapStore";
 import { AgentPanel } from "../ui/AgentPanel";
+import { theme } from "../utils/theme";
 
 export default function MapPage() {
   const [explored, setExplored] = useState(false);
@@ -20,7 +22,7 @@ export default function MapPage() {
     setExplored(true);
     if (globeRef.current) {
       globeRef.current.controls().autoRotate = true;
-      globeRef.current.controls().autoRotateSpeed = 0.6;
+      globeRef.current.controls().autoRotateSpeed = 0.5;
     }
   }
 
@@ -30,19 +32,17 @@ export default function MapPage() {
         width: "100vw",
         height: "100vh",
         position: "relative",
-        background: "#0a0a0f",
+        background: theme.color.bgDeep,
         overflow: "hidden",
       }}
     >
       <Loader />
 
-      {/* Globe — animated from right to center */}
       <_motion.div
         animate={
           explored
             ? { x: "0%", scale: 1 }
             : {
-                // On mobile: center it (no room to offset)
                 x:
                   typeof window !== "undefined" && window.innerWidth < 768
                     ? "0%"
@@ -64,14 +64,13 @@ export default function MapPage() {
         <Globe ref={globeRef} />
       </_motion.div>
 
-      {/* Landing hero — shows until Explore is clicked */}
       <AnimatePresence>
         {!explored && (
           <_motion.div
             key="landing"
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
             style={{ position: "absolute", inset: 0, zIndex: 10 }}
           >
             <LandingHeader onExplore={handleExplore} />
@@ -79,14 +78,13 @@ export default function MapPage() {
         )}
       </AnimatePresence>
 
-      {/* Map UI — shows after Explore */}
       <AnimatePresence>
         {explored && (
           <_motion.div
             key="mapui"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <FilterBar />
             <Sidebar />
@@ -97,20 +95,24 @@ export default function MapPage() {
                 position: "absolute",
                 top: 24,
                 right: 24,
-                background: "rgba(10,10,15,0.85)",
-                border: "1px solid #2a2a2e",
-                borderRadius: 8,
-                padding: "8px 18px",
-                color: "#aaa",
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+                background: theme.color.panel,
+                border: `1px solid ${theme.color.border}`,
+                borderRadius: theme.radius.md,
+                padding: "9px 18px",
+                color: theme.color.textSecondary,
                 fontSize: 12,
                 fontWeight: 600,
                 cursor: "pointer",
-                backdropFilter: "blur(12px)",
-                letterSpacing: 1,
+                letterSpacing: "0.03em",
                 zIndex: 100,
+                fontFamily: theme.font.family,
               }}
             >
-              Analytics →
+              <BarChart3 size={14} />
+              Analytics
             </button>
 
             {selectedNode && (
@@ -121,19 +123,20 @@ export default function MapPage() {
                   bottom: 32,
                   left: "50%",
                   transform: "translateX(-50%)",
-                  background: "rgba(10,10,15,0.85)",
-                  border: "1px solid #FF6B6B",
-                  color: "#FF6B6B",
-                  padding: "10px 24px",
-                  borderRadius: 8,
-                  fontSize: 13,
+                  background: theme.color.panel,
+                  border: `1px solid ${theme.color.industrialBlue}`,
+                  color: theme.color.industrialBlueLight,
+                  padding: "10px 22px",
+                  borderRadius: theme.radius.md,
+                  fontSize: 12,
                   fontWeight: 600,
                   cursor: "pointer",
-                  letterSpacing: 1,
+                  letterSpacing: "0.04em",
                   zIndex: 100,
+                  fontFamily: theme.font.family,
                 }}
               >
-                ← RESET VIEW
+                ← Reset view
               </button>
             )}
           </_motion.div>

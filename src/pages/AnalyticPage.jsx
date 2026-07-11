@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion as _motion } from "framer-motion";
+import { ArrowLeft, LineChart } from "lucide-react";
 import {
   BarChart,
   Bar,
@@ -9,18 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import data from "../data/supplyChain.json";
-
-const LEVEL_COLORS = {
-  eco: "#00FF88",
-  moderate: "#FFB347",
-  high: "#FF6B6B",
-};
-
-const ROUTE_COLORS = {
-  sea: "#00aaff",
-  air: "#FF6B6B",
-  land: "#00FF88",
-};
+import { LEVEL_COLORS, ROUTE_COLORS, APP_COPY } from "../utils/constants";
+import { theme } from "../utils/theme";
 
 const emissionData = data.suppliers.map((s) => ({
   name: s.city,
@@ -43,11 +34,34 @@ function CustomBar(props) {
       width={width}
       height={height}
       fill={emissionData[index].color}
-      fillOpacity={0.85}
-      rx={3}
+      fillOpacity={0.9}
+      rx={2}
     />
   );
 }
+
+const navButtonStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  background: theme.color.panel,
+  border: `1px solid ${theme.color.border}`,
+  borderRadius: theme.radius.md,
+  padding: "8px 16px",
+  color: theme.color.textSecondary,
+  fontSize: 12,
+  fontWeight: 600,
+  cursor: "pointer",
+  fontFamily: theme.font.family,
+};
+
+const panelStyle = {
+  background: theme.color.panel,
+  borderRadius: theme.radius.md,
+  padding: "26px 24px",
+  marginBottom: 20,
+  border: `1px solid ${theme.color.border}`,
+};
 
 export default function AnalyticsPage() {
   const navigate = useNavigate();
@@ -57,12 +71,12 @@ export default function AnalyticsPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.4 }}
       style={{
         height: "100vh",
-        background: "#0a0a0f",
-        color: "#fff",
-        fontFamily: "Segoe UI, sans-serif",
+        background: theme.color.bgDeep,
+        color: theme.color.textPrimary,
+        fontFamily: theme.font.family,
         padding: "0 0 80px",
         boxSizing: "border-box",
         overflowY: "auto",
@@ -74,53 +88,53 @@ export default function AnalyticsPage() {
           position: "sticky",
           top: 0,
           zIndex: 50,
-          background: "rgba(10,10,15,0.9)",
-          backdropFilter: "blur(12px)",
-          borderBottom: "1px solid #1e1e24",
-          padding: "16px 40px",
+          background: theme.color.bg,
+          borderBottom: `1px solid ${theme.color.border}`,
+          padding: "16px clamp(16px, 4vw, 40px)",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          gap: 12,
+          flexWrap: "wrap",
         }}
       >
         <div
           style={{
-            fontSize: 16,
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
             fontWeight: 700,
-            color: "#FF6B6B",
-            letterSpacing: 1,
+            color: theme.color.textPrimary,
+            letterSpacing: 0.5,
           }}
         >
-          ECO SYNC
+          <span
+            style={{
+              width: 7,
+              height: 7,
+              background: theme.color.industrialBlue,
+              borderRadius: 1,
+            }}
+          />
+          {APP_COPY.title.toUpperCase()}
         </div>
-        <button
-          onClick={() => navigate("/")}
-          style={{
-            background: "none",
-            border: "1px solid #2a2a2e",
-            borderRadius: 8,
-            padding: "7px 16px",
-            color: "#aaa",
-            fontSize: 12,
-            cursor: "pointer",
-          }}
-        >
-          ← Globe View
-        </button>
-        <button
-          onClick={() => navigate("/finance")}
-          style={{
-            background: "none",
-            border: "1px solid #2a2a2e",
-            borderRadius: 8,
-            padding: "7px 16px",
-            color: "#aaa",
-            fontSize: 12,
-            cursor: "pointer",
-          }}
-        >
-          Finance View →
-        </button>
+        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            style={navButtonStyle}
+          >
+            <ArrowLeft size={13} /> Globe View
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/finance")}
+            style={navButtonStyle}
+          >
+            Finance View <LineChart size={13} />
+          </button>
+        </div>
       </div>
 
       <div
@@ -131,22 +145,37 @@ export default function AnalyticsPage() {
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: 48 }}>
+        <div style={{ marginBottom: 40 }}>
           <div
             style={{
               fontSize: 11,
-              letterSpacing: 3,
-              color: "#555",
+              letterSpacing: 2.5,
+              color: theme.color.industrialBlueLight,
               textTransform: "uppercase",
               marginBottom: 10,
+              fontWeight: 700,
             }}
           >
             Supply Chain Intelligence
           </div>
-          <h1 style={{ fontSize: 32, fontWeight: 700, margin: 0 }}>
+          <h1
+            style={{
+              fontSize: 28,
+              fontWeight: 700,
+              margin: 0,
+              letterSpacing: "-0.01em",
+            }}
+          >
             Emissions Analytics
           </h1>
-          <p style={{ color: "#555", marginTop: 8, fontSize: 14 }}>
+          <p
+            style={{
+              color: theme.color.textSecondary,
+              marginTop: 8,
+              fontSize: 14,
+              lineHeight: 1.6,
+            }}
+          >
             Real-time overview of supplier emission scores and route
             distribution.
           </p>
@@ -157,20 +186,20 @@ export default function AnalyticsPage() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-            gap: 16,
-            marginBottom: 48,
+            gap: 14,
+            marginBottom: 40,
           }}
         >
           {[
             {
               label: "Total Suppliers",
               value: data.suppliers.length,
-              color: "#FF6B6B",
+              color: theme.color.industrialBlueLight,
             },
             {
               label: "Active Routes",
               value: data.routes.length,
-              color: "#00aaff",
+              color: theme.color.industrialBlueLight,
             },
             {
               label: "Avg Emission",
@@ -179,72 +208,78 @@ export default function AnalyticsPage() {
                   data.suppliers.reduce((a, s) => a + s.emission, 0) /
                     data.suppliers.length,
                 ) + "%",
-              color: "#FFB347",
+              color: theme.color.safetyYellow,
             },
           ].map((card) => (
-            <_motion.div
+            <div
               key={card.label}
-              whileHover={{ scale: 1.02 }}
               style={{
-                background: "#18181c",
-                border: `1px solid ${card.color}33`,
-                borderRadius: 12,
-                padding: "20px 24px",
+                background: theme.color.panel,
+                border: `1px solid ${theme.color.border}`,
+                borderTop: `2px solid ${card.color}`,
+                borderRadius: theme.radius.md,
+                padding: "18px 22px",
               }}
             >
               <div
                 style={{
-                  fontSize: 11,
-                  color: "#555",
-                  letterSpacing: 1.5,
+                  fontSize: 10.5,
+                  color: theme.color.textMuted,
+                  letterSpacing: 1.2,
                   textTransform: "uppercase",
                   marginBottom: 8,
+                  fontWeight: 600,
                 }}
               >
                 {card.label}
               </div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: card.color }}>
+              <div
+                style={{
+                  fontSize: 26,
+                  fontWeight: 700,
+                  color: theme.color.textPrimary,
+                  fontFamily: theme.font.mono,
+                }}
+              >
                 {card.value}
               </div>
-            </_motion.div>
+            </div>
           ))}
         </div>
 
         {/* Emission Bar Chart */}
-        <div
-          style={{
-            background: "#18181c",
-            borderRadius: 12,
-            padding: "28px 24px",
-            marginBottom: 24,
-            border: "1px solid #2a2a2e",
-          }}
-        >
+        <div style={panelStyle}>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
             Emission Score by Supplier
           </div>
-          <div style={{ fontSize: 12, color: "#555", marginBottom: 24 }}>
+          <div
+            style={{
+              fontSize: 12,
+              color: theme.color.textMuted,
+              marginBottom: 24,
+            }}
+          >
             CO₂ emission rating out of 100
           </div>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={emissionData} barSize={32}>
               <XAxis
                 dataKey="name"
-                tick={{ fill: "#555", fontSize: 11 }}
+                tick={{ fill: theme.color.textMuted, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
                 domain={[0, 100]}
-                tick={{ fill: "#555", fontSize: 11 }}
+                tick={{ fill: theme.color.textMuted, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
                 contentStyle={{
-                  background: "#18181c",
-                  border: "1px solid #2a2a2e",
-                  borderRadius: 8,
+                  background: theme.color.panelAlt,
+                  border: `1px solid ${theme.color.border}`,
+                  borderRadius: 6,
                   fontSize: 12,
                 }}
                 cursor={{ fill: "rgba(255,255,255,0.03)" }}
@@ -255,77 +290,78 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Route Type Chart */}
-        <div
-          style={{
-            background: "#18181c",
-            borderRadius: 12,
-            padding: "28px 24px",
-            marginBottom: 24,
-            border: "1px solid #2a2a2e",
-          }}
-        >
+        <div style={panelStyle}>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
             Routes by Transport Type
           </div>
-          <div style={{ fontSize: 12, color: "#555", marginBottom: 24 }}>
+          <div
+            style={{
+              fontSize: 12,
+              color: theme.color.textMuted,
+              marginBottom: 24,
+            }}
+          >
             Distribution of sea, air, and land routes
           </div>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={routeTypeData} barSize={48}>
               <XAxis
                 dataKey="type"
-                tick={{ fill: "#555", fontSize: 11 }}
+                tick={{ fill: theme.color.textMuted, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <YAxis
-                tick={{ fill: "#555", fontSize: 11 }}
+                tick={{ fill: theme.color.textMuted, fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
               />
               <Tooltip
                 contentStyle={{
-                  background: "#18181c",
-                  border: "1px solid #2a2a2e",
-                  borderRadius: 8,
+                  background: theme.color.panelAlt,
+                  border: `1px solid ${theme.color.border}`,
+                  borderRadius: 6,
                   fontSize: 12,
                 }}
                 cursor={{ fill: "rgba(255,255,255,0.03)" }}
               />
-              <Bar dataKey="count" fill="#FF6B6B" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="count"
+                fill={theme.color.industrialBlue}
+                radius={[2, 2, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
         {/* Route Table */}
-        <div
-          style={{
-            background: "#18181c",
-            borderRadius: 12,
-            padding: "28px 24px",
-            border: "1px solid #2a2a2e",
-          }}
-        >
+        <div style={{ ...panelStyle, marginBottom: 0 }}>
           <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
             All Routes
           </div>
-          <div style={{ fontSize: 12, color: "#555", marginBottom: 24 }}>
+          <div
+            style={{
+              fontSize: 12,
+              color: theme.color.textMuted,
+              marginBottom: 24,
+            }}
+          >
             Full breakdown of active supply routes
           </div>
           <table
             style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}
           >
             <thead>
-              <tr style={{ borderBottom: "1px solid #2a2a2e" }}>
+              <tr style={{ borderBottom: `1px solid ${theme.color.border}` }}>
                 {["Route", "From", "To", "Type", "Emission Delta"].map((h) => (
                   <th
                     key={h}
                     style={{
                       textAlign: "left",
                       padding: "8px 12px",
-                      color: "#555",
+                      color: theme.color.textMuted,
                       fontWeight: 600,
-                      fontSize: 11,
+                      fontSize: 10.5,
                       letterSpacing: 1,
                     }}
                   >
@@ -344,32 +380,48 @@ export default function AnalyticsPage() {
                   Number.isFinite(toEmission) && Number.isFinite(fromEmission)
                     ? toEmission - fromEmission
                     : 0;
-                const color = ROUTE_COLORS[route.type] || "#999";
+                const color = ROUTE_COLORS[route.type] || theme.color.steel;
                 return (
                   <tr
                     key={`${route.id}-${i}`}
                     style={{
-                      borderBottom: "1px solid #1a1a1f",
-                      background: i % 2 === 0 ? "transparent" : "#0d0d0f",
+                      borderBottom: `1px solid ${theme.color.border}`,
+                      background:
+                        i % 2 === 0 ? "transparent" : theme.color.panelAlt,
                     }}
                   >
                     <td
-                      style={{ padding: "12px", color: "#666", fontSize: 11 }}
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textMuted,
+                        fontSize: 11,
+                        fontFamily: theme.font.mono,
+                      }}
                     >
                       {route.id.toUpperCase()}
                     </td>
-                    <td style={{ padding: "12px", color: "#ccc" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                      }}
+                    >
                       {from?.city ?? "Unknown"}
                     </td>
-                    <td style={{ padding: "12px", color: "#ccc" }}>
+                    <td
+                      style={{
+                        padding: "12px",
+                        color: theme.color.textSecondary,
+                      }}
+                    >
                       {to?.city ?? "Unknown"}
                     </td>
                     <td style={{ padding: "12px" }}>
                       <span
                         style={{
-                          background: `${color}22`,
+                          background: `${color}18`,
                           border: `1px solid ${color}44`,
-                          borderRadius: 4,
+                          borderRadius: 3,
                           padding: "3px 8px",
                           color,
                           fontSize: 11,
@@ -383,8 +435,12 @@ export default function AnalyticsPage() {
                     <td
                       style={{
                         padding: "12px",
-                        color: delta > 0 ? "#FF6B6B" : "#00FF88",
+                        color:
+                          delta > 0
+                            ? theme.color.containerRed
+                            : theme.color.emerald,
                         fontWeight: 600,
+                        fontFamily: theme.font.mono,
                       }}
                     >
                       {delta > 0 ? "+" : ""}

@@ -1,46 +1,64 @@
+import { Suspense, lazy, useMemo } from "react";
 import { useMapStore } from "./store/useMapStore";
-import { Sidebar } from "./ui/Sidebar";
-import { FilterBar } from "./ui/FilterBar";
 import { Route, Routes } from "react-router-dom";
-import MapPage from "./pages/MapPage";
-import AnalyticsPage from "./pages/AnalyticPage";
-import FinancePage from "./pages/FinancePage";
+import { Loader } from "./components/Loader";
+import { DesktopGate } from "./components/DesktopGate";
+import { theme } from "./utils/theme";
+
+const MapPage = lazy(() => import("./pages/MapPage"));
+const AnalyticsPage = lazy(() => import("./pages/AnalyticPage"));
+const FinancePage = lazy(() => import("./pages/FinancePage"));
 
 export default function App() {
   const selectedNode = useMapStore((s) => s.selectedNode);
   const clearSelection = useMapStore((s) => s.clearSelection);
 
+  const buttonStyle = useMemo(
+    () => ({
+      position: "fixed",
+      bottom: 24,
+      left: "50%",
+      transform: "translateX(-50%)",
+      background: theme.color.panel,
+      border: `1px solid ${theme.color.borderStrong}`,
+      color: theme.color.textSecondary,
+      padding: "10px 20px",
+      borderRadius: theme.radius.md,
+      fontSize: 12,
+      fontWeight: 600,
+      cursor: "pointer",
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      fontFamily: theme.font.family,
+      boxShadow: theme.shadow.panel,
+      zIndex: 120,
+    }),
+    [],
+  );
+
   return (
-    <div className="min-h-screen w-screen bg-[#0a0a0f]">
-      <Routes>
-        <Route path="/" element={<MapPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
-        <Route path="/finance" element={<FinancePage />} />
-      </Routes>
-      <FilterBar />
-      <Sidebar />
-      {selectedNode && (
-        <button
-          onClick={clearSelection}
-          style={{
-            position: "absolute",
-            bottom: 32,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "rgba(10,10,15,0.85)",
-            border: "1px solid #FF6B6B",
-            color: "#FF6B6B",
-            padding: "10px 24px",
-            borderRadius: 8,
-            fontSize: 13,
-            fontWeight: 600,
-            cursor: "pointer",
-            letterSpacing: 1,
-          }}
-        >
-          ← RESET VIEW
-        </button>
-      )}
-    </div>
+    <DesktopGate>
+      <div
+        className="min-h-screen w-screen"
+        style={{
+          background: theme.color.bgDeep,
+          color: theme.color.textPrimary,
+          fontFamily: theme.font.family,
+        }}
+      >
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<MapPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/finance" element={<FinancePage />} />
+          </Routes>
+        </Suspense>
+        {selectedNode && (
+          <button type="button" onClick={clearSelection} style={buttonStyle}>
+            Reset view
+          </button>
+        )}
+      </div>
+    </DesktopGate>
   );
 }

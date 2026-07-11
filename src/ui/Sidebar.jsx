@@ -1,43 +1,30 @@
 import { useEffect, useRef } from "react";
 import { motion as _motion, AnimatePresence } from "framer-motion";
-import { useMapStore } from "../store/useMapStore";
+import { X, MapPin } from "lucide-react";
 import gsap from "gsap";
-
-const LEVEL_COLORS = {
-  eco: "#00FF88",
-  moderate: "#FFB347",
-  high: "#FF6B6B",
-};
-
-const LEVEL_LABELS = {
-  eco: "Eco Friendly",
-  moderate: "Moderate",
-  high: "High Emission",
-};
+import { useMapStore } from "../store/useMapStore";
+import { LEVEL_COLORS, LEVEL_LABELS } from "../utils/constants";
+import { theme } from "../utils/theme";
 
 function EmissionBar({ value, color }) {
   const barRef = useRef();
   const countRef = useRef();
 
   useEffect(() => {
-    // Animate the bar width
     gsap.fromTo(
       barRef.current,
       { width: "0%" },
-      { width: `${value}%`, duration: 1.2, ease: "power3.out", delay: 0.3 },
+      { width: `${value}%`, duration: 1.1, ease: "power3.out", delay: 0.2 },
     );
-
-    // Animate the counter number
     const obj = { val: 0 };
     gsap.to(obj, {
       val: value,
-      duration: 1.2,
+      duration: 1.1,
       ease: "power3.out",
-      delay: 0.3,
+      delay: 0.2,
       onUpdate: () => {
-        if (countRef.current) {
+        if (countRef.current)
           countRef.current.textContent = Math.round(obj.val) + "%";
-        }
       },
     });
   }, [value]);
@@ -48,30 +35,35 @@ function EmissionBar({ value, color }) {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: 4,
+          marginBottom: 6,
         }}
       >
-        <span style={{ fontSize: 11, color: "#666" }}>CO₂ Emission Score</span>
-        <span ref={countRef} style={{ fontSize: 11, color, fontWeight: 700 }}>
+        <span style={{ fontSize: 11, color: theme.color.textMuted }}>
+          CO₂ Emission Score
+        </span>
+        <span
+          ref={countRef}
+          style={{
+            fontSize: 11,
+            color,
+            fontWeight: 700,
+            fontFamily: theme.font.mono,
+          }}
+        >
           0%
         </span>
       </div>
       <div
         style={{
-          background: "#1a1a1f",
-          borderRadius: 4,
-          height: 6,
+          background: theme.color.panelAlt,
+          borderRadius: 2,
+          height: 5,
           overflow: "hidden",
         }}
       >
         <div
           ref={barRef}
-          style={{
-            height: "100%",
-            width: "0%",
-            background: `linear-gradient(90deg, ${color}88, ${color})`,
-            borderRadius: 4,
-          }}
+          style={{ height: "100%", width: "0%", background: color }}
         />
       </div>
     </div>
@@ -81,8 +73,9 @@ function EmissionBar({ value, color }) {
 export function Sidebar({ isMobile }) {
   const selectedNode = useMapStore((s) => s.selectedNode);
   const clearSelection = useMapStore((s) => s.clearSelection);
-
-  const color = selectedNode ? LEVEL_COLORS[selectedNode.level] : "#fff";
+  const color = selectedNode
+    ? LEVEL_COLORS[selectedNode.level]
+    : theme.color.textPrimary;
 
   return (
     <AnimatePresence>
@@ -92,7 +85,7 @@ export function Sidebar({ isMobile }) {
           initial={{ x: 340, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 340, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 120, damping: 20 }}
+          transition={{ type: "spring", stiffness: 130, damping: 22 }}
           style={{
             position: "absolute",
             top: 0,
@@ -100,87 +93,104 @@ export function Sidebar({ isMobile }) {
             width: isMobile ? "100%" : 320,
             maxWidth: isMobile ? "100%" : "50vw",
             height: "100vh",
-            background: "rgba(10,10,15,0.92)",
-            borderLeft: `1px solid ${color}33`,
-            backdropFilter: "blur(12px)",
-            padding: isMobile ? "20px 16px" : "32px 24px",
+            background: theme.color.panel,
+            borderLeft: `1px solid ${theme.color.border}`,
+            padding: isMobile ? "20px 16px" : "28px 24px",
             display: "flex",
             flexDirection: "column",
             gap: 20,
             overflowY: "auto",
             zIndex: 100,
+            fontFamily: theme.font.family,
           }}
         >
-          {/* Close button */}
           <button
             onClick={clearSelection}
             style={{
               alignSelf: "flex-end",
               background: "none",
-              border: "1px solid #333",
-              color: "#666",
+              border: `1px solid ${theme.color.border}`,
+              color: theme.color.textMuted,
               width: 28,
               height: 28,
-              borderRadius: "50%",
+              borderRadius: theme.radius.sm,
               cursor: "pointer",
-              fontSize: 14,
-              lineHeight: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            ×
+            <X size={14} />
           </button>
 
-          {/* Header */}
           <div>
             <div
               style={{
-                display: "inline-block",
-                background: `${color}22`,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                background: theme.color.panelAlt,
                 border: `1px solid ${color}55`,
-                borderRadius: 20,
-                padding: "3px 10px",
+                borderRadius: theme.radius.sm,
+                padding: "4px 10px",
                 fontSize: 10,
                 color,
-                letterSpacing: 1.5,
+                letterSpacing: 1.2,
                 textTransform: "uppercase",
+                fontWeight: 700,
                 marginBottom: 10,
               }}
             >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: 1,
+                  background: color,
+                }}
+              />
               {LEVEL_LABELS[selectedNode.level]}
             </div>
             <h2
               style={{
                 fontSize: isMobile ? 16 : 18,
                 fontWeight: 700,
-                color: "#fff",
+                color: theme.color.textPrimary,
                 margin: 0,
               }}
             >
               {selectedNode.name}
             </h2>
-            <p style={{ fontSize: 13, color: "#666", marginTop: 4 }}>
+            <p
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                fontSize: 13,
+                color: theme.color.textMuted,
+                marginTop: 6,
+              }}
+            >
+              <MapPin size={12} />
               {selectedNode.city}, {selectedNode.country}
             </p>
           </div>
 
-          {/* Divider */}
-          <div style={{ height: 1, background: "#1e1e24" }} />
+          <div style={{ height: 1, background: theme.color.border }} />
 
-          {/* Emission bar */}
           <EmissionBar value={selectedNode.emission} color={color} />
 
-          {/* Divider */}
-          <div style={{ height: 1, background: "#1e1e24" }} />
+          <div style={{ height: 1, background: theme.color.border }} />
 
-          {/* Products */}
           <div>
             <div
               style={{
-                fontSize: 11,
-                color: "#555",
+                fontSize: 10.5,
+                color: theme.color.textMuted,
                 letterSpacing: 1.5,
                 textTransform: "uppercase",
                 marginBottom: 10,
+                fontWeight: 600,
               }}
             >
               Products
@@ -190,12 +200,12 @@ export function Sidebar({ isMobile }) {
                 <span
                   key={p}
                   style={{
-                    background: "#18181c",
-                    border: "1px solid #2a2a2e",
-                    borderRadius: 6,
+                    background: theme.color.panelAlt,
+                    border: `1px solid ${theme.color.border}`,
+                    borderRadius: theme.radius.sm,
                     padding: "5px 10px",
                     fontSize: 12,
-                    color: "#ccc",
+                    color: theme.color.textSecondary,
                   }}
                 >
                   {p}
@@ -204,18 +214,17 @@ export function Sidebar({ isMobile }) {
             </div>
           </div>
 
-          {/* Divider */}
-          <div style={{ height: 1, background: "#1e1e24" }} />
+          <div style={{ height: 1, background: theme.color.border }} />
 
-          {/* Stats */}
           <div>
             <div
               style={{
-                fontSize: 11,
-                color: "#555",
+                fontSize: 10.5,
+                color: theme.color.textMuted,
                 letterSpacing: 1.5,
                 textTransform: "uppercase",
                 marginBottom: 12,
+                fontWeight: 600,
               }}
             >
               Quick Stats
@@ -236,81 +245,110 @@ export function Sidebar({ isMobile }) {
                 <div
                   key={stat.label}
                   style={{
-                    background: "#18181c",
-                    borderRadius: 8,
+                    background: theme.color.panelAlt,
+                    borderRadius: theme.radius.sm,
                     padding: "10px 12px",
-                    border: "1px solid #2a2a2e",
+                    border: `1px solid ${theme.color.border}`,
                   }}
                 >
-                  <div style={{ fontSize: 10, color: "#555", marginBottom: 4 }}>
+                  <div
+                    style={{
+                      fontSize: 10,
+                      color: theme.color.textMuted,
+                      marginBottom: 4,
+                    }}
+                  >
                     {stat.label}
                   </div>
-                  <div style={{ fontSize: 12, color: "#ccc", fontWeight: 600 }}>
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: theme.color.textSecondary,
+                      fontWeight: 600,
+                    }}
+                  >
                     {stat.value}
                   </div>
                 </div>
               ))}
             </div>
+
             {selectedNode.dpp && (
               <>
-                <div style={{ height: 1, background: "#1e1e24" }} />
+                <div
+                  style={{
+                    height: 1,
+                    background: theme.color.border,
+                    margin: "16px 0",
+                  }}
+                />
                 <div>
                   <div
                     style={{
-                      fontSize: 11,
-                      color: "#555",
+                      fontSize: 10.5,
+                      color: theme.color.textMuted,
                       letterSpacing: 1.5,
                       textTransform: "uppercase",
                       marginBottom: 10,
+                      fontWeight: 600,
                     }}
                   >
                     EU Digital Product Passport
                   </div>
                   <div
                     style={{
-                      background: "#0d0d0f",
-                      borderRadius: 8,
+                      background: theme.color.panelAlt,
+                      border: `1px solid ${theme.color.border}`,
+                      borderRadius: theme.radius.sm,
                       padding: "12px 14px",
                       fontSize: 11,
                       lineHeight: 2,
                     }}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ color: "#555" }}>Passport ID</span>
-                      <span
+                    {[
+                      [
+                        "Passport ID",
+                        selectedNode.dpp.passport_id,
+                        theme.font.mono,
+                      ],
+                      ["Regulation", selectedNode.dpp.regulation],
+                    ].map(([label, val, font]) => (
+                      <div
+                        key={label}
                         style={{
-                          color: "#aaa",
-                          fontFamily: "monospace",
-                          fontSize: 10,
+                          display: "flex",
+                          justifyContent: "space-between",
                         }}
                       >
-                        {selectedNode.dpp.passport_id}
-                      </span>
-                    </div>
+                        <span style={{ color: theme.color.textMuted }}>
+                          {label}
+                        </span>
+                        <span
+                          style={{
+                            color: theme.color.textSecondary,
+                            fontFamily: font,
+                            fontSize: font ? 10 : 11,
+                          }}
+                        >
+                          {val}
+                        </span>
+                      </div>
+                    ))}
                     <div
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ color: "#555" }}>Regulation</span>
-                      <span style={{ color: "#aaa" }}>
-                        {selectedNode.dpp.regulation}
+                      <span style={{ color: theme.color.textMuted }}>
+                        Scope 3
                       </span>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span style={{ color: "#555" }}>Scope 3</span>
-                      <span style={{ color: "#FFB347", fontWeight: 600 }}>
+                      <span
+                        style={{
+                          color: theme.color.safetyYellow,
+                          fontWeight: 600,
+                        }}
+                      >
                         {selectedNode.dpp.scope3_kg_co2e_per_unit} kg CO₂e/unit
                       </span>
                     </div>
@@ -320,12 +358,12 @@ export function Sidebar({ isMobile }) {
                         justifyContent: "space-between",
                       }}
                     >
-                      <span style={{ color: "#555" }}>CBAM</span>
+                      <span style={{ color: theme.color.textMuted }}>CBAM</span>
                       <span
                         style={{
                           color: selectedNode.dpp.carbon_border_adjustment
-                            ? "#FF6B6B"
-                            : "#00FF88",
+                            ? theme.color.containerRed
+                            : theme.color.emerald,
                         }}
                       >
                         {selectedNode.dpp.carbon_border_adjustment
@@ -345,11 +383,11 @@ export function Sidebar({ isMobile }) {
                         <span
                           key={c}
                           style={{
-                            background: "#00FF8811",
-                            border: "1px solid #00FF8833",
-                            borderRadius: 4,
+                            background: `${theme.color.emerald}18`,
+                            border: `1px solid ${theme.color.emerald}44`,
+                            borderRadius: theme.radius.sm,
                             padding: "2px 8px",
-                            color: "#00FF88",
+                            color: theme.color.emerald,
                             fontSize: 10,
                           }}
                         >
@@ -363,25 +401,22 @@ export function Sidebar({ isMobile }) {
             )}
           </div>
 
-          {/* View Full Profile button */}
-          <_motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             style={{
               marginTop: "auto",
-              background: `linear-gradient(135deg, ${color}22, ${color}11)`,
-              border: `1px solid ${color}55`,
-              borderRadius: 8,
+              background: theme.color.industrialBlue,
+              border: "none",
+              borderRadius: theme.radius.md,
               padding: "12px",
-              color,
+              color: "#fff",
               fontSize: 13,
               fontWeight: 600,
               cursor: "pointer",
-              letterSpacing: 0.5,
+              letterSpacing: "0.02em",
             }}
           >
-            View Full Profile →
-          </_motion.button>
+            View full profile →
+          </button>
         </_motion.div>
       )}
     </AnimatePresence>

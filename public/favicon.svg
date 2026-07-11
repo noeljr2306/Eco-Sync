@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Eco Sync logo">
+  <rect width="64" height="64" rx="16" fill="#06070b"/>
+  <path d="M18 44c8-12 12-19 18-27 3 5 8 14 10 20-4 2-9 3-15 3-6 0-8-1-13-2Z" fill="#ff6b6b"/>
+  <circle cx="32" cy="22" r="6" fill="#00ff88"/>
+</svg>

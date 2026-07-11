@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
 import { useProgress } from "@react-three/drei/core/Progress";
 import gsap from "gsap";
+import { theme } from "../utils/theme";
+import { APP_COPY } from "../utils/constants";
 
 export function Loader() {
   const { progress, active } = useProgress();
   const containerRef = useRef(null);
   const barRef = useRef(null);
-  const textRef = useRef(null);
 
   useEffect(() => {
     if (barRef.current) {
@@ -22,13 +23,11 @@ export function Loader() {
     if (!active && containerRef.current) {
       gsap.to(containerRef.current, {
         opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
+        duration: 0.6,
+        delay: 0.25,
         ease: "power2.inOut",
         onComplete: () => {
-          if (containerRef.current) {
-            containerRef.current.style.display = "none";
-          }
+          if (containerRef.current) containerRef.current.style.display = "none";
         },
       });
     }
@@ -41,45 +40,57 @@ export function Loader() {
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "#0a0a0f",
+        background: theme.color.bgDeep,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 24,
+        gap: 28,
+        fontFamily: theme.font.family,
       }}
     >
-      {/* Logo */}
       <div style={{ textAlign: "center" }}>
         <div
           style={{
-            fontSize: 32,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 10,
+            fontSize: 20,
             fontWeight: 700,
-            color: "#FF6B6B",
-            letterSpacing: 6,
-            marginBottom: 8,
+            color: theme.color.textPrimary,
+            letterSpacing: 3,
+            marginBottom: 10,
           }}
         >
-          ECO SYNC
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              background: theme.color.industrialBlue,
+              borderRadius: 1,
+              display: "inline-block",
+            }}
+          />
+          {APP_COPY.title.toUpperCase()}
         </div>
         <div
           style={{
-            fontSize: 11,
-            color: "#333",
-            letterSpacing: 3,
+            fontSize: 10.5,
+            color: theme.color.textMuted,
+            letterSpacing: 2.5,
             textTransform: "uppercase",
           }}
         >
-          Interactive Supply Chain Map
+          Global Network Map
         </div>
       </div>
 
-      {/* Progress bar */}
       <div style={{ width: 200 }}>
         <div
           style={{
-            background: "#1a1a1f",
-            borderRadius: 4,
+            background: theme.color.panel,
+            borderRadius: 2,
             height: 2,
             overflow: "hidden",
           }}
@@ -89,19 +100,18 @@ export function Loader() {
             style={{
               height: "100%",
               width: "0%",
-              background: "linear-gradient(90deg, #FF6B6B88, #FF6B6B)",
-              borderRadius: 4,
+              background: theme.color.industrialBlue,
             }}
           />
         </div>
         <div
-          ref={textRef}
           style={{
             textAlign: "center",
             marginTop: 10,
-            fontSize: 11,
-            color: "#333",
-            letterSpacing: 2,
+            fontSize: 10.5,
+            color: theme.color.textMuted,
+            letterSpacing: 1.5,
+            fontFamily: theme.font.mono,
           }}
         >
           {Math.round(progress)}%
